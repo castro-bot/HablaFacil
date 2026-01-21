@@ -1,0 +1,50 @@
+[
+  {
+    "id": "casa",
+    "spanish": "Casa",
+    "english": "Home",
+    "icon": "🏠",
+    "color": "bg-amber-500",
+    "order": 1
+  },
+  {
+    "id": "escuela",
+    "spanish": "Escuela",
+    "english": "School",
+    "icon": "🏫",
+    "color": "bg-blue-500",
+    "order": 2
+  },
+  {
+    "id": "parque",
+    "spanish": "Parque",
+    "english": "Park",
+    "icon": "🌳",
+    "color": "bg-green-500",
+    "order": 3
+  },
+  {
+    "id": "centro_comercial",
+    "spanish": "Centro Comercial",
+    "english": "Mall",
+    "icon": "🛒",
+    "color": "bg-purple-500",
+    "order": 4
+  },
+  {
+    "id": "hospital",
+    "spanish": "Hospital",
+    "english": "Hospital",
+    "icon": "🏥",
+    "color": "bg-red-500",
+    "order": 5
+  },
+  {
+    "id": "restaurante",
+    "spanish": "Restaurante",
+    "english": "Restaurant",
+    "icon": "🍽️",
+    "color": "bg-orange-500",
+    "order": 6
+  }
+]
