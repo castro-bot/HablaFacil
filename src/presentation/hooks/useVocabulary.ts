@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { type Word, WordCategory, WordFrequency, wordBelongsToLocation } from '../../domain/entities';
+import { type Word, WordFrequency, wordBelongsToLocation, validateCategory, validateFrequency } from '../../domain/entities';
+import { SupabaseVocabularyRepository } from '../../infrastructure/supabase';
 import vocabularyData from '../../data/vocabulary.json';
 
 /**
@@ -17,47 +18,65 @@ interface RawVocabularyItem {
 }
 
 /**
- * Transform raw JSON data to Word entities
+ * Transform raw JSON data to Word entities (for fallback)
+ * Uses validation functions for type-safe transformation
  */
 function transformToWord(raw: RawVocabularyItem): Word {
-  // Map string frequency to WordFrequency enum
-  const frequencyMap: Record<string, WordFrequency> = {
-    high: WordFrequency.HIGH,
-    medium: WordFrequency.MEDIUM,
-    low: WordFrequency.LOW,
-  };
-
   return {
     id: raw.id,
     spanish: raw.spanish,
     english: raw.english,
-    category: raw.category as WordCategory,
+    category: validateCategory(raw.category),
     locations: raw.locations,
-    frequency: frequencyMap[raw.frequency] ?? WordFrequency.MEDIUM,
+    frequency: validateFrequency(raw.frequency),
     symbolUrl: raw.symbolUrl ?? '',
     audioUrl: raw.audioUrl,
   };
 }
 
+// Singleton repository instance
+const vocabularyRepository = new SupabaseVocabularyRepository();
+
 /**
  * Custom hook for vocabulary management
- * Provides filtering, searching, and categorization
+ * Loads from Supabase with local JSON fallback
  */
 export function useVocabulary(currentLocationId: string = 'all') {
   const [allWords, setAllWords] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [dataSource, setDataSource] = useState<'supabase' | 'local' | null>(null);
 
-  // Load vocabulary on mount
+  // Load vocabulary on mount - try Supabase first, fallback to local
   useEffect(() => {
-    try {
-      const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
-      setAllWords(words);
-      setIsLoading(false);
-    } catch (err) {
-      setError('Failed to load vocabulary');
-      setIsLoading(false);
+    async function loadVocabulary() {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        // Try loading from Supabase
+        const words = await vocabularyRepository.getAllWords();
+
+        if (words.length > 0) {
+          setAllWords(words);
+          setDataSource('supabase');
+          console.log(`✅ Loaded ${words.length} words from Supabase`);
+        } else {
+          // Fallback to local JSON if Supabase returns empty
+          throw new Error('No words in Supabase, using local fallback');
+        }
+      } catch (err) {
+        // Fallback to local JSON
+        console.warn('⚠️ Supabase failed, using local vocabulary:', err);
+        const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
+        setAllWords(words);
+        setDataSource('local');
+      } finally {
+        setIsLoading(false);
+      }
     }
+
+    loadVocabulary();
   }, []);
 
   // Filter words by current location
@@ -111,9 +130,11 @@ export function useVocabulary(currentLocationId: string = 'all') {
     coreWords,
     isLoading,
     error,
+    dataSource,
     searchWords,
     getWordById,
     totalCount: allWords.length,
     filteredCount: filteredWords.length,
   };
 }
+

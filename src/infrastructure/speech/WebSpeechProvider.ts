@@ -13,50 +13,116 @@ export class WebSpeechProvider implements ISpeechService {
   private synthesis: SpeechSynthesis | null = null;
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private cachedVoices: SpeechSynthesisVoice[] = [];
+  private voicesLoaded: Promise<void>;
 
   constructor() {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       this.synthesis = window.speechSynthesis;
-      this.loadVoices();
+      this.voicesLoaded = this.loadVoices();
+    } else {
+      this.voicesLoaded = Promise.resolve();
     }
   }
 
   /**
-   * Load available voices (they may load asynchronously)
+   * Load available voices (they may load asynchronously in some browsers)
    */
-  private loadVoices(): void {
-    if (!this.synthesis) return;
+  private loadVoices(): Promise<void> {
+    return new Promise((resolve) => {
+      if (!this.synthesis) {
+        resolve();
+        return;
+      }
 
-    // Voices may not be immediately available
-    const loadVoicesHandler = () => {
-      this.cachedVoices = this.synthesis?.getVoices() ?? [];
-    };
+      const loadVoicesHandler = () => {
+        this.cachedVoices = this.synthesis?.getVoices() ?? [];
+        if (this.cachedVoices.length > 0) {
+          console.log(`🎤 Loaded ${this.cachedVoices.length} voices. Spanish voices:`,
+            this.cachedVoices.filter(v => v.lang.startsWith('es')).map(v => `${v.name} (${v.lang})`)
+          );
+          resolve();
+        }
+      };
 
-    loadVoicesHandler();
+      // Try loading immediately
+      loadVoicesHandler();
 
-    // Some browsers fire an event when voices are loaded
-    this.synthesis.addEventListener('voiceschanged', loadVoicesHandler);
+      // If no voices yet, wait for the voiceschanged event
+      if (this.cachedVoices.length === 0) {
+        this.synthesis.addEventListener('voiceschanged', loadVoicesHandler, { once: true });
+        // Fallback timeout in case the event never fires
+        setTimeout(() => {
+          loadVoicesHandler();
+          resolve();
+        }, 1000);
+      }
+    });
   }
 
   /**
-   * Find a Spanish voice matching the requested variant
+   * Find the best Spanish voice, prioritizing:
+   * 1. Latin American Spanish voices (es-MX preferred, es-US last)
+   * 2. Natural/Neural voices
+   * 3. Any Spanish voice (excluding Spain Spanish es-ES if possible)
    */
   private findSpanishVoice(variant: string): SpeechSynthesisVoice | null {
     if (this.cachedVoices.length === 0 && this.synthesis) {
       this.cachedVoices = this.synthesis.getVoices();
     }
 
-    // Priority: exact match, then any Spanish voice
-    const exactMatch = this.cachedVoices.find(
-      (voice) => voice.lang === variant
-    );
-    if (exactMatch) return exactMatch;
-
-    // Fallback to any Spanish voice
-    const spanishVoice = this.cachedVoices.find((voice) =>
+    const spanishVoices = this.cachedVoices.filter((voice) =>
       voice.lang.startsWith('es')
     );
-    return spanishVoice ?? null;
+
+    if (spanishVoices.length === 0) {
+      console.warn('⚠️ No Spanish voices found! Available voices:',
+        this.cachedVoices.map(v => `${v.name} (${v.lang})`).slice(0, 10)
+      );
+      return null;
+    }
+
+    // Latin American voice priority (es-MX is most natural, es-US last as it often sounds robotic)
+    const latamPriority = ['es-MX', 'es-419', 'es-AR', 'es-CO', 'es-CL', 'es-PE', 'es-US'];
+
+    // Priority 1: Find best Latin American voice by priority order
+    for (const lang of latamPriority) {
+      const voice = spanishVoices.find((v) => v.lang === lang);
+      if (voice) {
+        // Within same lang, prefer natural/neural voices
+        const naturalVoice = spanishVoices.find(
+          (v) => v.lang === lang &&
+          (v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('neural'))
+        );
+        if (naturalVoice) {
+          console.log(`✅ Using natural Latin American voice: ${naturalVoice.name} (${naturalVoice.lang})`);
+          return naturalVoice;
+        }
+        console.log(`✅ Using Latin American voice: ${voice.name} (${voice.lang})`);
+        return voice;
+      }
+    }
+
+    // Priority 2: Any natural/neural Spanish voice (even Spain Spanish is better than robotic)
+    const naturalVoice = spanishVoices.find((voice) =>
+      voice.name.toLowerCase().includes('natural') ||
+      voice.name.toLowerCase().includes('neural') ||
+      voice.name.toLowerCase().includes('premium')
+    );
+    if (naturalVoice) {
+      console.log(`✅ Using natural voice: ${naturalVoice.name} (${naturalVoice.lang})`);
+      return naturalVoice;
+    }
+
+    // Priority 3: Any Spanish voice except es-ES (Spain) if there are alternatives
+    const nonSpainVoice = spanishVoices.find((voice) => voice.lang !== 'es-ES');
+    if (nonSpainVoice) {
+      console.log(`✅ Using Spanish voice: ${nonSpainVoice.name} (${nonSpainVoice.lang})`);
+      return nonSpainVoice;
+    }
+
+    // Priority 4: Fallback to any Spanish voice
+    console.log(`✅ Using fallback Spanish voice: ${spanishVoices[0].name} (${spanishVoices[0].lang})`);
+    return spanishVoices[0];
   }
 
   async speak(text: string, options?: SpeechOptions): Promise<void> {
@@ -65,18 +131,24 @@ export class WebSpeechProvider implements ISpeechService {
       return;
     }
 
+    // Wait for voices to be loaded
+    await this.voicesLoaded;
+
     // Stop any current speech
     this.stop();
 
     const mergedOptions = { ...DEFAULT_SPEECH_OPTIONS, ...options };
     const utterance = new SpeechSynthesisUtterance(text);
 
-    // Set voice
+    // Set voice (this is critical for proper Spanish pronunciation)
     const voice = this.findSpanishVoice(mergedOptions.voiceVariant);
     if (voice) {
       utterance.voice = voice;
+      utterance.lang = voice.lang; // Use the actual voice language
+    } else {
+      // Force Spanish language even without a specific voice
+      utterance.lang = mergedOptions.voiceVariant;
     }
-    utterance.lang = mergedOptions.voiceVariant;
 
     // Set speech parameters
     utterance.rate = mergedOptions.rate;
@@ -120,6 +192,8 @@ export class WebSpeechProvider implements ISpeechService {
   }
 
   async getAvailableVoices(): Promise<VoiceInfo[]> {
+    await this.voicesLoaded;
+
     if (this.cachedVoices.length === 0 && this.synthesis) {
       this.cachedVoices = this.synthesis.getVoices();
     }
@@ -131,7 +205,8 @@ export class WebSpeechProvider implements ISpeechService {
         id: voice.voiceURI,
         name: voice.name,
         language: voice.lang,
-        isNeural: voice.name.toLowerCase().includes('neural'),
+        isNeural: voice.name.toLowerCase().includes('neural') ||
+                  voice.name.toLowerCase().includes('natural'),
       }));
   }
 }

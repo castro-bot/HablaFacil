@@ -9,10 +9,11 @@ import { LocationSelector } from '../components/LocationSelector';
  */
 export function HomePage() {
   const { state, addWord, removeLastWord, clearSentence, setLocation } = useAppContext();
-  const { filteredWords, isLoading: vocabLoading } = useVocabulary(state.currentLocationId);
-  const { locations, isLoading: locationsLoading } = useLocations();
+  const { filteredWords, isLoading: vocabLoading, error: vocabError, dataSource } = useVocabulary(state.currentLocationId);
+  const { locations, isLoading: locationsLoading, error: locationsError } = useLocations();
 
   const isLoading = vocabLoading || locationsLoading;
+  const hasError = vocabError || locationsError;
 
   if (isLoading) {
     return (
@@ -27,6 +28,14 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      {/* Error Banner */}
+      {hasError && (
+        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+          <p className="font-bold">⚠️ Error de conexión</p>
+          <p className="text-sm">Usando datos locales. {vocabError || locationsError}</p>
+        </div>
+      )}
+
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 py-3">
@@ -34,9 +43,16 @@ export function HomePage() {
             <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
               🗣️ HablaFácil
             </h1>
-            <span className="text-sm text-gray-500">
-              {filteredWords.length} palabras
-            </span>
+            <div className="flex items-center gap-3">
+              {dataSource === 'local' && (
+                <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
+                  📦 Offline
+                </span>
+              )}
+              <span className="text-sm text-gray-500">
+                {filteredWords.length} palabras
+              </span>
+            </div>
           </div>
         </div>
       </header>
@@ -51,11 +67,10 @@ export function HomePage() {
           />
         </section>
 
-        {/* Symbol Grid */}
+        {/* Symbol Grid - Click to speak, drag to add */}
         <section aria-label="Vocabulario">
           <SymbolGrid
             words={filteredWords}
-            onWordSelect={addWord}
             showTranslations={state.preferences.showTranslations}
             groupByCategory={true}
           />
@@ -67,6 +82,7 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto">
           <SentenceBuilder
             sentence={state.sentence}
+            onAddWord={addWord}
             onRemoveLastWord={removeLastWord}
             onClear={clearSentence}
           />
