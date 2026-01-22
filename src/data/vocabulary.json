@@ -4,1215 +4,1798 @@
     "spanish": "Yo",
     "english": "I",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6632?download=false"
   },
   {
     "id": "tu",
     "spanish": "Tú",
     "english": "You",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6625?download=false"
   },
   {
     "id": "el",
     "spanish": "Él",
     "english": "He",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6480?download=false"
   },
   {
     "id": "ella",
     "spanish": "Ella",
     "english": "She",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7028?download=false"
   },
   {
     "id": "nosotros",
     "spanish": "Nosotros",
     "english": "We",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "quiero",
-    "spanish": "Quiero",
-    "english": "I want",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "necesito",
-    "spanish": "Necesito",
-    "english": "I need",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "tengo",
-    "spanish": "Tengo",
-    "english": "I have",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "me_gusta",
-    "spanish": "Me gusta",
-    "english": "I like",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "no_me_gusta",
-    "spanish": "No me gusta",
-    "english": "I don't like",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "puedo",
-    "spanish": "Puedo",
-    "english": "I can",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "ir",
-    "spanish": "Ir",
-    "english": "To go",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "comer",
-    "spanish": "Comer",
-    "english": "To eat",
-    "category": "verbos",
-    "locations": ["casa", "restaurante", "escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "beber",
-    "spanish": "Beber",
-    "english": "To drink",
-    "category": "verbos",
-    "locations": ["casa", "restaurante", "escuela", "parque"],
-    "frequency": "high"
-  },
-  {
-    "id": "jugar",
-    "spanish": "Jugar",
-    "english": "To play",
-    "category": "verbos",
-    "locations": ["casa", "parque", "escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "dormir",
-    "spanish": "Dormir",
-    "english": "To sleep",
-    "category": "verbos",
-    "locations": ["casa", "hospital"],
-    "frequency": "high"
-  },
-  {
-    "id": "ayudar",
-    "spanish": "Ayudar",
-    "english": "To help",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "hablar",
-    "spanish": "Hablar",
-    "english": "To talk",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "escuchar",
-    "spanish": "Escuchar",
-    "english": "To listen",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "ver",
-    "spanish": "Ver",
-    "english": "To see",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "leer",
-    "spanish": "Leer",
-    "english": "To read",
-    "category": "verbos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "escribir",
-    "spanish": "Escribir",
-    "english": "To write",
-    "category": "verbos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "caminar",
-    "spanish": "Caminar",
-    "english": "To walk",
-    "category": "verbos",
-    "locations": ["parque", "centro_comercial"],
-    "frequency": "medium"
-  },
-  {
-    "id": "correr",
-    "spanish": "Correr",
-    "english": "To run",
-    "category": "verbos",
-    "locations": ["parque", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "sentarse",
-    "spanish": "Sentarse",
-    "english": "To sit",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "levantarse",
-    "spanish": "Levantarse",
-    "english": "To stand up",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "si",
-    "spanish": "Sí",
-    "english": "Yes",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "no",
-    "spanish": "No",
-    "english": "No",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "hola",
-    "spanish": "Hola",
-    "english": "Hello",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "adios",
-    "spanish": "Adiós",
-    "english": "Goodbye",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "gracias",
-    "spanish": "Gracias",
-    "english": "Thank you",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "por_favor",
-    "spanish": "Por favor",
-    "english": "Please",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "lo_siento",
-    "spanish": "Lo siento",
-    "english": "I'm sorry",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "perdon",
-    "spanish": "Perdón",
-    "english": "Excuse me",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "buenos_dias",
-    "spanish": "Buenos días",
-    "english": "Good morning",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "buenas_noches",
-    "spanish": "Buenas noches",
-    "english": "Good night",
-    "category": "sociales",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "que",
-    "spanish": "¿Qué?",
-    "english": "What?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "donde",
-    "spanish": "¿Dónde?",
-    "english": "Where?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "cuando",
-    "spanish": "¿Cuándo?",
-    "english": "When?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "quien",
-    "spanish": "¿Quién?",
-    "english": "Who?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "por_que",
-    "spanish": "¿Por qué?",
-    "english": "Why?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "como",
-    "spanish": "¿Cómo?",
-    "english": "How?",
-    "category": "preguntas",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "cuanto",
-    "spanish": "¿Cuánto?",
-    "english": "How much?",
-    "category": "preguntas",
-    "locations": ["centro_comercial", "restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "agua",
-    "spanish": "Agua",
-    "english": "Water",
-    "category": "sustantivos",
-    "locations": ["casa", "restaurante", "escuela", "parque", "hospital"],
-    "frequency": "high"
-  },
-  {
-    "id": "comida",
-    "spanish": "Comida",
-    "english": "Food",
-    "category": "sustantivos",
-    "locations": ["casa", "restaurante", "escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "bano",
-    "spanish": "Baño",
-    "english": "Bathroom",
-    "category": "sustantivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "mama",
-    "spanish": "Mamá",
-    "english": "Mom",
-    "category": "sustantivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "papa",
-    "spanish": "Papá",
-    "english": "Dad",
-    "category": "sustantivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "hermano",
-    "spanish": "Hermano",
-    "english": "Brother",
-    "category": "sustantivos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "hermana",
-    "spanish": "Hermana",
-    "english": "Sister",
-    "category": "sustantivos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "amigo",
-    "spanish": "Amigo",
-    "english": "Friend",
-    "category": "sustantivos",
-    "locations": ["escuela", "parque"],
-    "frequency": "high"
-  },
-  {
-    "id": "maestro",
-    "spanish": "Maestro",
-    "english": "Teacher",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "doctor",
-    "spanish": "Doctor",
-    "english": "Doctor",
-    "category": "sustantivos",
-    "locations": ["hospital"],
-    "frequency": "high"
-  },
-  {
-    "id": "libro",
-    "spanish": "Libro",
-    "english": "Book",
-    "category": "sustantivos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "juguete",
-    "spanish": "Juguete",
-    "english": "Toy",
-    "category": "sustantivos",
-    "locations": ["casa", "parque", "centro_comercial"],
-    "frequency": "medium"
-  },
-  {
-    "id": "pelota",
-    "spanish": "Pelota",
-    "english": "Ball",
-    "category": "sustantivos",
-    "locations": ["casa", "parque", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "telefono",
-    "spanish": "Teléfono",
-    "english": "Phone",
-    "category": "sustantivos",
-    "locations": ["casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "television",
-    "spanish": "Televisión",
-    "english": "TV",
-    "category": "sustantivos",
-    "locations": ["casa"],
-    "frequency": "medium"
-  },
-  {
-    "id": "musica",
-    "spanish": "Música",
-    "english": "Music",
-    "category": "sustantivos",
-    "locations": ["casa", "escuela", "parque"],
-    "frequency": "medium"
-  },
-  {
-    "id": "carro",
-    "spanish": "Carro",
-    "english": "Car",
-    "category": "sustantivos",
-    "locations": ["casa", "centro_comercial"],
-    "frequency": "medium"
-  },
-  {
-    "id": "ropa",
-    "spanish": "Ropa",
-    "english": "Clothes",
-    "category": "sustantivos",
-    "locations": ["casa", "centro_comercial"],
-    "frequency": "medium"
-  },
-  {
-    "id": "zapatos",
-    "spanish": "Zapatos",
-    "english": "Shoes",
-    "category": "sustantivos",
-    "locations": ["casa", "centro_comercial"],
-    "frequency": "medium"
-  },
-  {
-    "id": "medicina",
-    "spanish": "Medicina",
-    "english": "Medicine",
-    "category": "sustantivos",
-    "locations": ["casa", "hospital"],
-    "frequency": "medium"
-  },
-  {
-    "id": "dolor",
-    "spanish": "Dolor",
-    "english": "Pain",
-    "category": "sustantivos",
-    "locations": ["hospital", "casa"],
-    "frequency": "high"
-  },
-  {
-    "id": "feliz",
-    "spanish": "Feliz",
-    "english": "Happy",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "triste",
-    "spanish": "Triste",
-    "english": "Sad",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "enojado",
-    "spanish": "Enojado",
-    "english": "Angry",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "cansado",
-    "spanish": "Cansado",
-    "english": "Tired",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "hambre",
-    "spanish": "Tengo hambre",
-    "english": "I'm hungry",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "sed",
-    "spanish": "Tengo sed",
-    "english": "I'm thirsty",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "frio",
-    "spanish": "Tengo frío",
-    "english": "I'm cold",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "calor",
-    "spanish": "Tengo calor",
-    "english": "I'm hot",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "asustado",
-    "spanish": "Asustado",
-    "english": "Scared",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "sorprendido",
-    "spanish": "Sorprendido",
-    "english": "Surprised",
-    "category": "emociones",
-    "locations": ["all"],
-    "frequency": "low"
-  },
-  {
-    "id": "grande",
-    "spanish": "Grande",
-    "english": "Big",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "pequeno",
-    "spanish": "Pequeño",
-    "english": "Small",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "mas",
-    "spanish": "Más",
-    "english": "More",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "menos",
-    "spanish": "Menos",
-    "english": "Less",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "bueno",
-    "spanish": "Bueno",
-    "english": "Good",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "malo",
-    "spanish": "Malo",
-    "english": "Bad",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "nuevo",
-    "spanish": "Nuevo",
-    "english": "New",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "viejo",
-    "spanish": "Viejo",
-    "english": "Old",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "rapido",
-    "spanish": "Rápido",
-    "english": "Fast",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "lento",
-    "spanish": "Lento",
-    "english": "Slow",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "uno",
-    "spanish": "Uno",
-    "english": "One",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "dos",
-    "spanish": "Dos",
-    "english": "Two",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "tres",
-    "spanish": "Tres",
-    "english": "Three",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "cuatro",
-    "spanish": "Cuatro",
-    "english": "Four",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cinco",
-    "spanish": "Cinco",
-    "english": "Five",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "diez",
-    "spanish": "Diez",
-    "english": "Ten",
-    "category": "numeros",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "rojo",
-    "spanish": "Rojo",
-    "english": "Red",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "azul",
-    "spanish": "Azul",
-    "english": "Blue",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "verde",
-    "spanish": "Verde",
-    "english": "Green",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "amarillo",
-    "spanish": "Amarillo",
-    "english": "Yellow",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "negro",
-    "spanish": "Negro",
-    "english": "Black",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "blanco",
-    "spanish": "Blanco",
-    "english": "White",
-    "category": "colores",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "hoy",
-    "spanish": "Hoy",
-    "english": "Today",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "manana",
-    "spanish": "Mañana",
-    "english": "Tomorrow",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "ayer",
-    "spanish": "Ayer",
-    "english": "Yesterday",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "ahora",
-    "spanish": "Ahora",
-    "english": "Now",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "despues",
-    "spanish": "Después",
-    "english": "Later",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "antes",
-    "spanish": "Antes",
-    "english": "Before",
-    "category": "tiempo",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "aqui",
-    "spanish": "Aquí",
-    "english": "Here",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "alla",
-    "spanish": "Allá",
-    "english": "There",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "este",
-    "spanish": "Este",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7185?download=false"
+  },
+  {
+    "id": "ellos",
+    "spanish": "Ellos",
+    "english": "They",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7032?download=false"
+  },
+  {
+    "id": "esto",
+    "spanish": "Esto",
     "english": "This",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7095?download=false"
   },
   {
-    "id": "ese",
-    "spanish": "Ese",
+    "id": "eso",
+    "spanish": "Eso",
     "english": "That",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "arriba",
-    "spanish": "Arriba",
-    "english": "Up",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "abajo",
-    "spanish": "Abajo",
-    "english": "Down",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "dentro",
-    "spanish": "Dentro",
-    "english": "Inside",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "fuera",
-    "spanish": "Fuera",
-    "english": "Outside",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "esperar",
-    "spanish": "Esperar",
-    "english": "To wait",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "terminar",
-    "spanish": "Terminar",
-    "english": "To finish",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "empezar",
-    "spanish": "Empezar",
-    "english": "To start",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "abrir",
-    "spanish": "Abrir",
-    "english": "To open",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cerrar",
-    "spanish": "Cerrar",
-    "english": "To close",
-    "category": "verbos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "me_duele",
-    "spanish": "Me duele",
-    "english": "It hurts",
-    "category": "emociones",
-    "locations": ["hospital", "casa"],
-    "frequency": "high"
-  },
-  {
-    "id": "cabeza",
-    "spanish": "Cabeza",
-    "english": "Head",
-    "category": "sustantivos",
-    "locations": ["hospital"],
-    "frequency": "medium"
-  },
-  {
-    "id": "estomago",
-    "spanish": "Estómago",
-    "english": "Stomach",
-    "category": "sustantivos",
-    "locations": ["hospital"],
-    "frequency": "medium"
-  },
-  {
-    "id": "mano",
-    "spanish": "Mano",
-    "english": "Hand",
-    "category": "sustantivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "pie",
-    "spanish": "Pie",
-    "english": "Foot",
-    "category": "sustantivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "comprar",
-    "spanish": "Comprar",
-    "english": "To buy",
-    "category": "verbos",
-    "locations": ["centro_comercial", "restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "pagar",
-    "spanish": "Pagar",
-    "english": "To pay",
-    "category": "verbos",
-    "locations": ["centro_comercial", "restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "dinero",
-    "spanish": "Dinero",
-    "english": "Money",
-    "category": "sustantivos",
-    "locations": ["centro_comercial", "restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "caja",
-    "spanish": "Caja",
-    "english": "Cashier",
-    "category": "sustantivos",
-    "locations": ["centro_comercial", "restaurante"],
-    "frequency": "low"
-  },
-  {
-    "id": "menu",
-    "spanish": "Menú",
-    "english": "Menu",
-    "category": "sustantivos",
-    "locations": ["restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "mesa",
-    "spanish": "Mesa",
-    "english": "Table",
-    "category": "sustantivos",
-    "locations": ["restaurante", "casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "silla",
-    "spanish": "Silla",
-    "english": "Chair",
-    "category": "sustantivos",
-    "locations": ["restaurante", "casa", "escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "columpio",
-    "spanish": "Columpio",
-    "english": "Swing",
-    "category": "sustantivos",
-    "locations": ["parque"],
-    "frequency": "medium"
-  },
-  {
-    "id": "resbaladilla",
-    "spanish": "Resbaladilla",
-    "english": "Slide",
-    "category": "sustantivos",
-    "locations": ["parque"],
-    "frequency": "medium"
-  },
-  {
-    "id": "arbol",
-    "spanish": "Árbol",
-    "english": "Tree",
-    "category": "sustantivos",
-    "locations": ["parque"],
-    "frequency": "low"
-  },
-  {
-    "id": "flor",
-    "spanish": "Flor",
-    "english": "Flower",
-    "category": "sustantivos",
-    "locations": ["parque"],
-    "frequency": "low"
-  },
-  {
-    "id": "lapiz",
-    "spanish": "Lápiz",
-    "english": "Pencil",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "papel",
-    "spanish": "Papel",
-    "english": "Paper",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "mochila",
-    "spanish": "Mochila",
-    "english": "Backpack",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "medium"
-  },
-  {
-    "id": "clase",
-    "spanish": "Clase",
-    "english": "Class",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "recreo",
-    "spanish": "Recreo",
-    "english": "Recess",
-    "category": "sustantivos",
-    "locations": ["escuela"],
-    "frequency": "high"
-  },
-  {
-    "id": "tarea",
-    "spanish": "Tarea",
-    "english": "Homework",
-    "category": "sustantivos",
-    "locations": ["escuela", "casa"],
-    "frequency": "medium"
-  },
-  {
-    "id": "almuerzo",
-    "spanish": "Almuerzo",
-    "english": "Lunch",
-    "category": "sustantivos",
-    "locations": ["escuela", "casa", "restaurante"],
-    "frequency": "high"
-  },
-  {
-    "id": "desayuno",
-    "spanish": "Desayuno",
-    "english": "Breakfast",
-    "category": "sustantivos",
-    "locations": ["casa"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cena",
-    "spanish": "Cena",
-    "english": "Dinner",
-    "category": "sustantivos",
-    "locations": ["casa", "restaurante"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cama",
-    "spanish": "Cama",
-    "english": "Bed",
-    "category": "sustantivos",
-    "locations": ["casa", "hospital"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cocina",
-    "spanish": "Cocina",
-    "english": "Kitchen",
-    "category": "sustantivos",
-    "locations": ["casa"],
-    "frequency": "medium"
-  },
-  {
-    "id": "sala",
-    "spanish": "Sala",
-    "english": "Living room",
-    "category": "sustantivos",
-    "locations": ["casa"],
-    "frequency": "medium"
-  },
-  {
-    "id": "cuarto",
-    "spanish": "Cuarto",
-    "english": "Room",
-    "category": "sustantivos",
-    "locations": ["casa", "hospital"],
-    "frequency": "medium"
-  },
-  {
-    "id": "otra_vez",
-    "spanish": "Otra vez",
-    "english": "Again",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "high"
-  },
-  {
-    "id": "diferente",
-    "spanish": "Diferente",
-    "english": "Different",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
-  },
-  {
-    "id": "mismo",
-    "spanish": "Mismo",
-    "english": "Same",
-    "category": "adjetivos",
-    "locations": ["all"],
-    "frequency": "medium"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6906?download=false"
   },
   {
     "id": "todo",
     "spanish": "Todo",
-    "english": "All/Everything",
+    "english": "Everything",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5596?download=false"
   },
   {
     "id": "nada",
     "spanish": "Nada",
     "english": "Nothing",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/29839?download=false"
+  },
+  {
+    "id": "mi",
+    "spanish": "Mío",
+    "english": "Mine",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/12264?download=false"
+  },
+  {
+    "id": "quien",
+    "spanish": "Quién",
+    "english": "Who",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/9853?download=false"
+  },
+  {
+    "id": "que",
+    "spanish": "Qué",
+    "english": "What",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/22620?download=false"
+  },
+  {
+    "id": "donde",
+    "spanish": "Dónde",
+    "english": "Where",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7764?download=false"
+  },
+  {
+    "id": "cuando",
+    "spanish": "Cuándo",
+    "english": "When",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32874?download=false"
+  },
+  {
+    "id": "porque",
+    "spanish": "Por qué",
+    "english": "Why",
+    "category": "pronombres",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/36719?download=false"
+  },
+  {
+    "id": "quiero",
+    "spanish": "Quiero",
+    "english": "want",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5441?download=false"
+  },
+  {
+    "id": "necesito",
+    "spanish": "Necesito",
+    "english": "need",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37160?download=false"
+  },
+  {
+    "id": "tengo",
+    "spanish": "Tengo",
+    "english": "have",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32761?download=false"
+  },
+  {
+    "id": "me_gusta",
+    "spanish": "Me gusta",
+    "english": "like",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37826?download=false"
+  },
+  {
+    "id": "no_me_gusta",
+    "spanish": "No me gusta",
+    "english": "dislike",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37825?download=false"
+  },
+  {
+    "id": "puedo",
+    "spanish": "Puedo",
+    "english": "can",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
+  },
+  {
+    "id": "ir",
+    "spanish": "Ir",
+    "english": "go",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8142?download=false"
+  },
+  {
+    "id": "comer",
+    "spanish": "Comer",
+    "english": "eat",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "restaurante",
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6456?download=false"
+  },
+  {
+    "id": "beber",
+    "spanish": "Beber",
+    "english": "drink",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "restaurante",
+      "escuela",
+      "parque"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6061?download=false"
+  },
+  {
+    "id": "jugar",
+    "spanish": "Jugar",
+    "english": "play",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "parque",
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/23392?download=false"
+  },
+  {
+    "id": "dormir",
+    "spanish": "Dormir",
+    "english": "sleep",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "hospital"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6479?download=false"
+  },
+  {
+    "id": "ayudar",
+    "spanish": "Ayudar",
+    "english": "help",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32648?download=false"
+  },
+  {
+    "id": "hablar",
+    "spanish": "Hablar",
+    "english": "talk",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6517?download=false"
+  },
+  {
+    "id": "escuchar",
+    "spanish": "Escuchar",
+    "english": "listen",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6572?download=false"
+  },
+  {
+    "id": "ver",
+    "spanish": "Ver",
+    "english": "see",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6564?download=false"
+  },
+  {
+    "id": "leer",
+    "spanish": "Leer",
+    "english": "read",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7141?download=false"
+  },
+  {
+    "id": "escribir",
+    "spanish": "Escribir",
+    "english": "write",
+    "category": "verbos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2380?download=false"
+  },
+  {
+    "id": "caminar",
+    "spanish": "Caminar",
+    "english": "walk",
+    "category": "verbos",
+    "locations": [
+      "parque",
+      "centro_comercial"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/29951?download=false"
+  },
+  {
+    "id": "correr",
+    "spanish": "Correr",
+    "english": "run",
+    "category": "verbos",
+    "locations": [
+      "parque",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6465?download=false"
+  },
+  {
+    "id": "sentarse",
+    "spanish": "Sentarse",
+    "english": "sit",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6611?download=false"
+  },
+  {
+    "id": "levantarse",
+    "spanish": "Levantarse",
+    "english": "stand up",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/13370?download=false"
+  },
+  {
+    "id": "esperar",
+    "spanish": "Esperar",
+    "english": "wait",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/36914?download=false"
+  },
+  {
+    "id": "terminar",
+    "spanish": "Terminar",
+    "english": "finish",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32814?download=false"
+  },
+  {
+    "id": "empezar",
+    "spanish": "Empezar",
+    "english": "start",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5431?download=false"
+  },
+  {
+    "id": "abrir",
+    "spanish": "Abrir",
+    "english": "open",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/24825?download=false"
+  },
+  {
+    "id": "cerrar",
+    "spanish": "Cerrar",
+    "english": "close",
+    "category": "verbos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/30383?download=false"
+  },
+  {
+    "id": "comprar",
+    "spanish": "Comprar",
+    "english": "buy",
+    "category": "verbos",
+    "locations": [
+      "centro_comercial",
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8986?download=false"
+  },
+  {
+    "id": "pagar",
+    "spanish": "Pagar",
+    "english": "pay",
+    "category": "verbos",
+    "locations": [
+      "centro_comercial",
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6457?download=false"
+  },
+  {
+    "id": "si",
+    "spanish": "Sí",
+    "english": "Yes",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5584?download=false"
+  },
+  {
+    "id": "no",
+    "spanish": "No",
+    "english": "No",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5526?download=false"
+  },
+  {
+    "id": "hola",
+    "spanish": "Hola",
+    "english": "Hello",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6522?download=false"
+  },
+  {
+    "id": "adios",
+    "spanish": "Adiós",
+    "english": "Goodbye",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6028?download=false"
+  },
+  {
+    "id": "gracias",
+    "spanish": "Gracias",
+    "english": "Thank you",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8129?download=false"
+  },
+  {
+    "id": "por_favor",
+    "spanish": "Por favor",
+    "english": "Please",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8195?download=false"
+  },
+  {
+    "id": "lo_siento",
+    "spanish": "Lo siento",
+    "english": "sorry",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/11625?download=false"
+  },
+  {
+    "id": "perdon",
+    "spanish": "Perdón",
+    "english": "excuse me",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": ""
+  },
+  {
+    "id": "buenos_dias",
+    "spanish": "Buenos días",
+    "english": "Good morning",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6944?download=false"
+  },
+  {
+    "id": "buenas_noches",
+    "spanish": "Buenas noches",
+    "english": "Good night",
+    "category": "sociales",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6942?download=false"
+  },
+  {
+    "id": "que_pregunta",
+    "spanish": "¿Qué?",
+    "english": "What question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "donde_pregunta",
+    "spanish": "¿Dónde?",
+    "english": "Where question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "cuando_pregunta",
+    "spanish": "¿Cuándo?",
+    "english": "When question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "quien_pregunta",
+    "spanish": "¿Quién?",
+    "english": "Who question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "por_que",
+    "spanish": "¿Por qué?",
+    "english": "Why question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "como",
+    "spanish": "¿Cómo?",
+    "english": "How question",
+    "category": "preguntas",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+  },
+  {
+    "id": "cuanto",
+    "spanish": "¿Cuánto?",
+    "english": "How much",
+    "category": "preguntas",
+    "locations": [
+      "centro_comercial",
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7073?download=false"
+  },
+  {
+    "id": "agua",
+    "spanish": "Agua",
+    "english": "Water",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "restaurante",
+      "escuela",
+      "parque",
+      "hospital"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32464?download=false"
+  },
+  {
+    "id": "comida",
+    "spanish": "Comida",
+    "english": "Food",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "restaurante",
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4610?download=false"
+  },
+  {
+    "id": "bano",
+    "spanish": "Baño",
+    "english": "Bathroom",
+    "category": "sustantivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5921?download=false"
+  },
+  {
+    "id": "mama",
+    "spanish": "Mamá",
+    "english": "Mom",
+    "category": "sustantivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2458?download=false"
+  },
+  {
+    "id": "papa",
+    "spanish": "Papá",
+    "english": "Dad",
+    "category": "sustantivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/31146?download=false"
+  },
+  {
+    "id": "hermano",
+    "spanish": "Hermano",
+    "english": "Brother",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2423?download=false"
+  },
+  {
+    "id": "hermana",
+    "spanish": "Hermana",
+    "english": "Sister",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2422?download=false"
+  },
+  {
+    "id": "amigo",
+    "spanish": "Amigo",
+    "english": "Friend",
+    "category": "sustantivos",
+    "locations": [
+      "escuela",
+      "parque"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/25790?download=false"
+  },
+  {
+    "id": "maestro",
+    "spanish": "Maestro",
+    "english": "Teacher",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6556?download=false"
+  },
+  {
+    "id": "doctor",
+    "spanish": "Doctor",
+    "english": "Doctor",
+    "category": "sustantivos",
+    "locations": [
+      "hospital"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6561?download=false"
+  },
+  {
+    "id": "libro",
+    "spanish": "Libro",
+    "english": "Book",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/25191?download=false"
+  },
+  {
+    "id": "juguete",
+    "spanish": "Juguete",
+    "english": "Toy",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "parque",
+      "centro_comercial"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/9813?download=false"
+  },
+  {
+    "id": "pelota",
+    "spanish": "Pelota",
+    "english": "Ball",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "parque",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3241?download=false"
+  },
+  {
+    "id": "telefono",
+    "spanish": "Teléfono",
+    "english": "Phone",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/26479?download=false"
+  },
+  {
+    "id": "television",
+    "spanish": "Televisión",
+    "english": "TV",
+    "category": "sustantivos",
+    "locations": [
+      "casa"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/25498?download=false"
+  },
+  {
+    "id": "musica",
+    "spanish": "Música",
+    "english": "Music",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "escuela",
+      "parque"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/24791?download=false"
+  },
+  {
+    "id": "carro",
+    "spanish": "Carro",
+    "english": "Car",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "centro_comercial"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2339?download=false"
+  },
+  {
+    "id": "ropa",
+    "spanish": "Ropa",
+    "english": "Clothes",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "centro_comercial"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7233?download=false"
+  },
+  {
+    "id": "zapatos",
+    "spanish": "Zapatos",
+    "english": "Shoes",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "centro_comercial"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2775?download=false"
+  },
+  {
+    "id": "medicina",
+    "spanish": "Medicina",
+    "english": "Medicine",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "hospital"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8163?download=false"
+  },
+  {
+    "id": "dolor",
+    "spanish": "Dolor",
+    "english": "Pain",
+    "category": "sustantivos",
+    "locations": [
+      "hospital",
+      "casa"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2367?download=false"
+  },
+  {
+    "id": "dinero",
+    "spanish": "Dinero",
+    "english": "Money",
+    "category": "sustantivos",
+    "locations": [
+      "centro_comercial",
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4630?download=false"
+  },
+  {
+    "id": "caja",
+    "spanish": "Caja",
+    "english": "Cashier",
+    "category": "sustantivos",
+    "locations": [
+      "centro_comercial",
+      "restaurante"
+    ],
+    "frequency": "low",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3001?download=false"
+  },
+  {
+    "id": "menu",
+    "spanish": "Menú",
+    "english": "Menu",
+    "category": "sustantivos",
+    "locations": [
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32514?download=false"
+  },
+  {
+    "id": "mesa",
+    "spanish": "Mesa",
+    "english": "Table",
+    "category": "sustantivos",
+    "locations": [
+      "restaurante",
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3129?download=false"
+  },
+  {
+    "id": "silla",
+    "spanish": "Silla",
+    "english": "Chair",
+    "category": "sustantivos",
+    "locations": [
+      "restaurante",
+      "casa",
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3155?download=false"
+  },
+  {
+    "id": "columpio",
+    "spanish": "Columpio",
+    "english": "Swing",
+    "category": "sustantivos",
+    "locations": [
+      "parque"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4608?download=false"
+  },
+  {
+    "id": "resbaladilla",
+    "spanish": "Resbaladilla",
+    "english": "Slide",
+    "category": "sustantivos",
+    "locations": [
+      "parque"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4759?download=false"
+  },
+  {
+    "id": "arbol",
+    "spanish": "Árbol",
+    "english": "Tree",
+    "category": "sustantivos",
+    "locations": [
+      "parque"
+    ],
+    "frequency": "low",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/3057?download=false"
+  },
+  {
+    "id": "flor",
+    "spanish": "Flor",
+    "english": "Flower",
+    "category": "sustantivos",
+    "locations": [
+      "parque"
+    ],
+    "frequency": "low",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7104?download=false"
+  },
+  {
+    "id": "lapiz",
+    "spanish": "Lápiz",
+    "english": "Pencil",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2440?download=false"
+  },
+  {
+    "id": "papel",
+    "spanish": "Papel",
+    "english": "Paper",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8349?download=false"
+  },
+  {
+    "id": "mochila",
+    "spanish": "Mochila",
+    "english": "Backpack",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2475?download=false"
+  },
+  {
+    "id": "clase",
+    "spanish": "Clase",
+    "english": "Class",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35401?download=false"
+  },
+  {
+    "id": "recreo",
+    "spanish": "Recreo",
+    "english": "Recess",
+    "category": "sustantivos",
+    "locations": [
+      "escuela"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/27339?download=false"
+  },
+  {
+    "id": "tarea",
+    "spanish": "Tarea",
+    "english": "Homework",
+    "category": "sustantivos",
+    "locations": [
+      "escuela",
+      "casa"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/11228?download=false"
+  },
+  {
+    "id": "almuerzo",
+    "spanish": "Almuerzo",
+    "english": "Lunch",
+    "category": "sustantivos",
+    "locations": [
+      "escuela",
+      "casa",
+      "restaurante"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4611?download=false"
+  },
+  {
+    "id": "desayuno",
+    "spanish": "Desayuno",
+    "english": "Breakfast",
+    "category": "sustantivos",
+    "locations": [
+      "casa"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4626?download=false"
+  },
+  {
+    "id": "cena",
+    "spanish": "Cena",
+    "english": "Dinner",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "restaurante"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4611?download=false"
+  },
+  {
+    "id": "cama",
+    "spanish": "Cama",
+    "english": "Bed",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "hospital"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/25900?download=false"
+  },
+  {
+    "id": "cocina_lugar",
+    "spanish": "Cocina",
+    "english": "Kitchen",
+    "category": "sustantivos",
+    "locations": [
+      "casa"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/10752?download=false"
+  },
+  {
+    "id": "sala",
+    "spanish": "Sala",
+    "english": "Living room",
+    "category": "sustantivos",
+    "locations": [
+      "casa"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6211?download=false"
+  },
+  {
+    "id": "cuarto",
+    "spanish": "Cuarto",
+    "english": "Room",
+    "category": "sustantivos",
+    "locations": [
+      "casa",
+      "hospital"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32234?download=false"
+  },
+  {
+    "id": "cabeza",
+    "spanish": "Cabeza",
+    "english": "Head",
+    "category": "sustantivos",
+    "locations": [
+      "hospital"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2673?download=false"
+  },
+  {
+    "id": "estomago",
+    "spanish": "Estómago",
+    "english": "Stomach",
+    "category": "sustantivos",
+    "locations": [
+      "hospital"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2786?download=false"
+  },
+  {
+    "id": "mano",
+    "spanish": "Mano",
+    "english": "Hand",
+    "category": "sustantivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/28431?download=false"
+  },
+  {
+    "id": "pie",
+    "spanish": "Pie",
+    "english": "Foot",
+    "category": "sustantivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/25327?download=false"
+  },
+  {
+    "id": "feliz",
+    "spanish": "Feliz",
+    "english": "Happy",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35533?download=false"
+  },
+  {
+    "id": "triste",
+    "spanish": "Triste",
+    "english": "Sad",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35545?download=false"
+  },
+  {
+    "id": "enojado",
+    "spanish": "Enojado",
+    "english": "Angry",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35539?download=false"
+  },
+  {
+    "id": "cansado",
+    "spanish": "Cansado",
+    "english": "Tired",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35537?download=false"
+  },
+  {
+    "id": "hambre",
+    "spanish": "Tengo hambre",
+    "english": "hungry",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4962?download=false"
+  },
+  {
+    "id": "sed",
+    "spanish": "Tengo sed",
+    "english": "thirsty",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4963?download=false"
+  },
+  {
+    "id": "frio_emocion",
+    "spanish": "Tengo frío",
+    "english": "cold feeling",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35557?download=false"
+  },
+  {
+    "id": "calor",
+    "spanish": "Tengo calor",
+    "english": "hot feeling",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35561?download=false"
+  },
+  {
+    "id": "asustado",
+    "spanish": "Asustado",
+    "english": "Scared",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35535?download=false"
+  },
+  {
+    "id": "sorprendido",
+    "spanish": "Sorprendido",
+    "english": "Surprised",
+    "category": "emociones",
+    "locations": [
+      "all"
+    ],
+    "frequency": "low",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/35529?download=false"
+  },
+  {
+    "id": "me_duele",
+    "spanish": "Me duele",
+    "english": "pain",
+    "category": "emociones",
+    "locations": [
+      "hospital",
+      "casa"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2367?download=false"
+  },
+  {
+    "id": "grande",
+    "spanish": "Grande",
+    "english": "Big",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4658?download=false"
+  },
+  {
+    "id": "pequeno",
+    "spanish": "Pequeño",
+    "english": "Small",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4716?download=false"
+  },
+  {
+    "id": "mas",
+    "spanish": "Más",
+    "english": "More",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5508?download=false"
+  },
+  {
+    "id": "menos",
+    "spanish": "Menos",
+    "english": "Less",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5512?download=false"
+  },
+  {
+    "id": "bueno",
+    "spanish": "Bueno",
+    "english": "Good",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4581?download=false"
+  },
+  {
+    "id": "malo",
+    "spanish": "Malo",
+    "english": "Bad",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5504?download=false"
+  },
+  {
+    "id": "nuevo",
+    "spanish": "Nuevo",
+    "english": "New",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/11316?download=false"
+  },
+  {
+    "id": "viejo",
+    "spanish": "Viejo",
+    "english": "Old",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/11394?download=false"
+  },
+  {
+    "id": "rapido",
+    "spanish": "Rápido",
+    "english": "Fast",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5306?download=false"
+  },
+  {
+    "id": "lento",
+    "spanish": "Lento",
+    "english": "Slow",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4676?download=false"
+  },
+  {
+    "id": "aqui",
+    "spanish": "Aquí",
+    "english": "Here",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5382?download=false"
+  },
+  {
+    "id": "alla",
+    "spanish": "Allá",
+    "english": "There",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5375?download=false"
+  },
+  {
+    "id": "arriba",
+    "spanish": "Arriba",
+    "english": "Up",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5388?download=false"
+  },
+  {
+    "id": "abajo",
+    "spanish": "Abajo",
+    "english": "Down",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37428?download=false"
+  },
+  {
+    "id": "dentro",
+    "spanish": "Dentro",
+    "english": "Inside",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5439?download=false"
+  },
+  {
+    "id": "fuera",
+    "spanish": "Fuera",
+    "english": "Outside",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5475?download=false"
+  },
+  {
+    "id": "otra_vez",
+    "spanish": "Otra vez",
+    "english": "Again",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37163?download=false"
+  },
+  {
+    "id": "diferente",
+    "spanish": "Diferente",
+    "english": "Different",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4628?download=false"
+  },
+  {
+    "id": "mismo",
+    "spanish": "Mismo",
+    "english": "Same",
+    "category": "adjetivos",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4667?download=false"
+  },
+  {
+    "id": "uno",
+    "spanish": "Uno",
+    "english": "One",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2627?download=false"
+  },
+  {
+    "id": "dos",
+    "spanish": "Dos",
+    "english": "Two",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2628?download=false"
+  },
+  {
+    "id": "tres",
+    "spanish": "Tres",
+    "english": "Three",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2629?download=false"
+  },
+  {
+    "id": "cuatro",
+    "spanish": "Cuatro",
+    "english": "Four",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2630?download=false"
+  },
+  {
+    "id": "cinco",
+    "spanish": "Cinco",
+    "english": "Five",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/39311?download=false"
+  },
+  {
+    "id": "diez",
+    "spanish": "Diez",
+    "english": "Ten",
+    "category": "numeros",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7025?download=false"
+  },
+  {
+    "id": "rojo",
+    "spanish": "Rojo",
+    "english": "Red",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2808?download=false"
+  },
+  {
+    "id": "azul",
+    "spanish": "Azul",
+    "english": "Blue",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4869?download=false"
+  },
+  {
+    "id": "verde",
+    "spanish": "Verde",
+    "english": "Green",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/4887?download=false"
+  },
+  {
+    "id": "amarillo",
+    "spanish": "Amarillo",
+    "english": "Yellow",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2648?download=false"
+  },
+  {
+    "id": "negro",
+    "spanish": "Negro",
+    "english": "Black",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/2886?download=false"
+  },
+  {
+    "id": "blanco",
+    "spanish": "Blanco",
+    "english": "White",
+    "category": "colores",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/8043?download=false"
+  },
+  {
+    "id": "hoy",
+    "spanish": "Hoy",
+    "english": "Today",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7131?download=false"
+  },
+  {
+    "id": "manana",
+    "spanish": "Mañana",
+    "english": "Tomorrow",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/38278?download=false"
+  },
+  {
+    "id": "ayer",
+    "spanish": "Ayer",
+    "english": "Yesterday",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/38279?download=false"
+  },
+  {
+    "id": "ahora",
+    "spanish": "Ahora",
+    "english": "Now",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32747?download=false"
+  },
+  {
+    "id": "despues",
+    "spanish": "Después",
+    "english": "Later",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32749?download=false"
+  },
+  {
+    "id": "antes",
+    "spanish": "Antes",
+    "english": "Before",
+    "category": "tiempo",
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32745?download=false"
   },
   {
     "id": "algo",
     "spanish": "Algo",
     "english": "Something",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "high"
+    "locations": [
+      "all"
+    ],
+    "frequency": "high",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/38768?download=false"
   },
   {
     "id": "alguien",
     "spanish": "Alguien",
     "english": "Someone",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "medium"
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37779?download=false"
   },
   {
     "id": "nadie",
     "spanish": "Nadie",
     "english": "Nobody",
     "category": "pronombres",
-    "locations": ["all"],
-    "frequency": "medium"
+    "locations": [
+      "all"
+    ],
+    "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/11314?download=false"
   }
 ]
