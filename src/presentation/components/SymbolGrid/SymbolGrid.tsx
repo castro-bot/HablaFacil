@@ -1,51 +1,19 @@
-import type { Word } from '../../../domain/entities';
+import { type Word, type WordCategory, CATEGORY_LABELS, CATEGORY_ORDER } from '../../../domain/entities';
 import { SymbolCard } from './SymbolCard';
 
 interface SymbolGridProps {
   words: Word[];
-  onWordSelect: (word: Word) => void;
+  onWordClick?: (word: Word) => void;
   showTranslations?: boolean;
   groupByCategory?: boolean;
 }
-
-/**
- * Category display names in Spanish
- */
-const CATEGORY_LABELS: Record<string, string> = {
-  verbos: '🏃 Verbos',
-  sustantivos: '📦 Sustantivos',
-  adjetivos: '✨ Adjetivos',
-  pronombres: '👤 Pronombres',
-  preguntas: '❓ Preguntas',
-  sociales: '👋 Sociales',
-  numeros: '🔢 Números',
-  colores: '🎨 Colores',
-  tiempo: '⏰ Tiempo',
-  emociones: '😊 Emociones',
-};
-
-/**
- * Category display order
- */
-const CATEGORY_ORDER: string[] = [
-  'pronombres',
-  'verbos',
-  'sociales',
-  'preguntas',
-  'sustantivos',
-  'emociones',
-  'adjetivos',
-  'numeros',
-  'colores',
-  'tiempo',
-];
 
 /**
  * Symbol grid component displaying vocabulary words
  */
 export function SymbolGrid({
   words,
-  onWordSelect,
+  onWordClick,
   showTranslations = true,
   groupByCategory = true,
 }: SymbolGridProps) {
@@ -59,19 +27,19 @@ export function SymbolGrid({
 
   // Group words by category if enabled
   if (groupByCategory) {
-    const grouped: Record<string, Word[]> = {};
+    const grouped = new Map<WordCategory, Word[]>();
 
     for (const word of words) {
       const category = word.category;
-      if (!grouped[category]) {
-        grouped[category] = [];
+      if (!grouped.has(category)) {
+        grouped.set(category, []);
       }
-      grouped[category].push(word);
+      grouped.get(category)!.push(word);
     }
 
     // Sort categories by predefined order
     const sortedCategories = CATEGORY_ORDER.filter(
-      (cat) => grouped[cat] && grouped[cat].length > 0
+      (cat) => grouped.has(cat) && grouped.get(cat)!.length > 0
     );
 
     return (
@@ -82,14 +50,14 @@ export function SymbolGrid({
               id={`category-${category}`}
               className="text-lg font-bold text-gray-700 mb-3 sticky top-0 bg-white/90 backdrop-blur-sm py-2 z-10"
             >
-              {CATEGORY_LABELS[category] ?? category}
+              {CATEGORY_LABELS[category]}
             </h2>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-3">
-              {grouped[category].map((word) => (
+              {grouped.get(category)!.map((word) => (
                 <SymbolCard
                   key={word.id}
                   word={word}
-                  onSelect={onWordSelect}
+                  onWordClick={onWordClick}
                   showTranslation={showTranslations}
                 />
               ))}
@@ -107,10 +75,11 @@ export function SymbolGrid({
         <SymbolCard
           key={word.id}
           word={word}
-          onSelect={onWordSelect}
+          onWordClick={onWordClick}
           showTranslation={showTranslations}
         />
       ))}
     </div>
   );
 }
+

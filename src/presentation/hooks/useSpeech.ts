@@ -1,9 +1,10 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { getHybridSpeechService } from '../../infrastructure/speech';
 import type { SpeechOptions, VoiceInfo } from '../../domain/services';
 
 /**
  * Custom hook for text-to-speech functionality
+ * Uses useRef for the speech service to avoid stale closure issues
  */
 export function useSpeech() {
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -11,16 +12,17 @@ export function useSpeech() {
   const [availableVoices, setAvailableVoices] = useState<VoiceInfo[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const speechService = getHybridSpeechService();
+  // Use ref to store speech service to avoid dependency issues
+  const speechServiceRef = useRef(getHybridSpeechService());
 
   // Check availability and load voices on mount
   useEffect(() => {
     const checkAvailability = async () => {
-      const available = await speechService.isAvailable();
+      const available = await speechServiceRef.current.isAvailable();
       setIsAvailable(available);
 
       if (available) {
-        const voices = await speechService.getAvailableVoices();
+        const voices = await speechServiceRef.current.getAvailableVoices();
         setAvailableVoices(voices);
       }
     };
@@ -39,7 +41,7 @@ export function useSpeech() {
       setIsSpeaking(true);
 
       try {
-        await speechService.speak(text, options);
+        await speechServiceRef.current.speak(text, options);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Speech failed';
         setError(errorMessage);
@@ -48,30 +50,19 @@ export function useSpeech() {
         setIsSpeaking(false);
       }
     },
-    [speechService]
+    []
   );
 
   /**
    * Stop current speech
    */
   const stop = useCallback(() => {
-    speechService.stop();
+    speechServiceRef.current.stop();
     setIsSpeaking(false);
-  }, [speechService]);
-
-  /**
-   * Speak a single word (convenience method)
-   */
-  const speakWord = useCallback(
-    async (spanish: string, options?: SpeechOptions) => {
-      await speak(spanish, options);
-    },
-    [speak]
-  );
+  }, []);
 
   return {
     speak,
-    speakWord,
     stop,
     isSpeaking,
     isAvailable,

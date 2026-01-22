@@ -1,18 +1,23 @@
-import type { Sentence } from '../../../domain/entities';
+import { useState } from 'react';
+import type { Sentence, Word } from '../../../domain/entities';
 import { sentenceToSpanishText, isSentenceEmpty, getSentenceLength, MAX_SENTENCE_LENGTH } from '../../../domain/entities';
 import { useSpeech } from '../../hooks';
+import { ActionButton } from '../common';
 
 interface SentenceBuilderProps {
   sentence: Sentence;
+  onAddWord: (word: Word) => void;
   onRemoveLastWord: () => void;
   onClear: () => void;
 }
 
 /**
  * Sentence builder component - displays and controls the current sentence
+ * Supports drag-and-drop to add words
  */
-export function SentenceBuilder({ sentence, onRemoveLastWord, onClear }: SentenceBuilderProps) {
+export function SentenceBuilder({ sentence, onAddWord, onRemoveLastWord, onClear }: SentenceBuilderProps) {
   const { speak, isSpeaking, stop } = useSpeech();
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const sentenceText = sentenceToSpanishText(sentence);
   const isEmpty = isSentenceEmpty(sentence);
@@ -28,23 +33,58 @@ export function SentenceBuilder({ sentence, onRemoveLastWord, onClear }: Sentenc
     }
   };
 
+  // Drag and drop handlers
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    try {
+      const wordData = e.dataTransfer.getData('application/json');
+      if (wordData) {
+        const word: Word = JSON.parse(wordData);
+        onAddWord(word);
+      }
+    } catch (error) {
+      console.error('Failed to parse dropped word:', error);
+    }
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-4">
-      {/* Sentence display */}
+      {/* Sentence display - Drop zone */}
       <div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
         className={`
           min-h-[60px] md:min-h-[80px] p-4 rounded-xl mb-4
           flex items-center justify-center flex-wrap gap-2
-          ${isEmpty ? 'bg-gray-50' : 'bg-blue-50'}
-          transition-colors duration-200
+          transition-all duration-200 border-2 border-dashed
+          ${isDragOver
+            ? 'bg-blue-100 border-blue-400 scale-[1.02]'
+            : isEmpty
+              ? 'bg-gray-50 border-gray-300'
+              : 'bg-blue-50 border-transparent'
+          }
         `}
         role="status"
         aria-live="polite"
-        aria-label="Oración actual"
+        aria-label="Oración actual - Zona para soltar palabras"
       >
         {isEmpty ? (
-          <span className="text-gray-400 text-lg">
-            Toca las palabras para crear una oración
+          <span className={`text-lg ${isDragOver ? 'text-blue-600 font-medium' : 'text-gray-400'}`}>
+            {isDragOver ? '¡Suelta aquí para añadir!' : '📥 Arrastra palabras aquí'}
           </span>
         ) : (
           <span className="text-xl md:text-2xl font-medium text-gray-800 text-center">
@@ -69,73 +109,34 @@ export function SentenceBuilder({ sentence, onRemoveLastWord, onClear }: Sentenc
       {/* Action buttons */}
       <div className="flex gap-3">
         {/* Speak Button */}
-        <button
+        <ActionButton
           onClick={handleSpeak}
           disabled={isEmpty}
-          className={`
-            flex-1 flex items-center justify-center gap-2
-            py-4 px-6 rounded-xl font-bold text-lg
-            transition-all duration-200
-            ${isEmpty
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : isSpeaking
-                ? 'bg-red-500 text-white hover:bg-red-600'
-                : 'bg-green-500 text-white hover:bg-green-600 active:scale-95'
-            }
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500
-          `}
-          aria-label={isSpeaking ? 'Detener' : 'Hablar'}
-        >
-          {isSpeaking ? (
-            <>
-              <span className="text-2xl">⏹️</span>
-              <span>Detener</span>
-            </>
-          ) : (
-            <>
-              <span className="text-2xl">🔊</span>
-              <span>Hablar</span>
-            </>
-          )}
-        </button>
+          variant={isSpeaking ? 'danger' : 'primary'}
+          icon={isSpeaking ? '⏹️' : '🔊'}
+          label={isSpeaking ? 'Detener' : 'Hablar'}
+          ariaLabel={isSpeaking ? 'Detener' : 'Hablar oración completa'}
+        />
 
         {/* Backspace Button */}
-        <button
+        <ActionButton
           onClick={onRemoveLastWord}
           disabled={isEmpty}
-          className={`
-            flex items-center justify-center
-            w-16 h-16 rounded-xl font-bold text-2xl
-            transition-all duration-200
-            ${isEmpty
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-yellow-500 text-white hover:bg-yellow-600 active:scale-95'
-            }
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500
-          `}
-          aria-label="Borrar última palabra"
-        >
-          ⬅️
-        </button>
+          variant="warning"
+          icon="⬅️"
+          ariaLabel="Borrar última palabra"
+          iconOnly
+        />
 
         {/* Clear Button */}
-        <button
+        <ActionButton
           onClick={onClear}
           disabled={isEmpty}
-          className={`
-            flex items-center justify-center
-            w-16 h-16 rounded-xl font-bold text-2xl
-            transition-all duration-200
-            ${isEmpty
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-red-500 text-white hover:bg-red-600 active:scale-95'
-            }
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500
-          `}
-          aria-label="Borrar todo"
-        >
-          🗑️
-        </button>
+          variant="danger"
+          icon="🗑️"
+          ariaLabel="Borrar todo"
+          iconOnly
+        />
       </div>
     </div>
   );
