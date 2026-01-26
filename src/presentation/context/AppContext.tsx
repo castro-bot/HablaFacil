@@ -112,7 +112,37 @@ interface AppProviderProps {
 }
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  // Load initial preferences from localStorage
+  const loadInitialState = (): AppState => {
+    let savedPreferences = DEFAULT_USER_PREFERENCES;
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('user_preferences');
+        if (stored) {
+          savedPreferences = { ...DEFAULT_USER_PREFERENCES, ...JSON.parse(stored) };
+        }
+      } catch (error) {
+        console.warn('Failed to load preferences from localStorage', error);
+      }
+    }
+    return {
+      ...initialState,
+      preferences: savedPreferences,
+    };
+  };
+
+  const [state, dispatch] = useReducer(appReducer, initialState, loadInitialState);
+
+  // Save preferences to localStorage when they change
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('user_preferences', JSON.stringify(state.preferences));
+      } catch (error) {
+        console.error('Failed to save preferences to localStorage', error);
+      }
+    }
+  }, [state.preferences]);
 
   // Convenience action creators
   const addWord = (word: Word) => dispatch({ type: 'ADD_WORD', payload: word });

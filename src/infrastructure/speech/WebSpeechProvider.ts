@@ -141,7 +141,23 @@ export class WebSpeechProvider implements ISpeechService {
     const utterance = new SpeechSynthesisUtterance(text);
 
     // Set voice (this is critical for proper Spanish pronunciation)
-    const voice = this.findSpanishVoice(mergedOptions.voiceVariant);
+    let voice: SpeechSynthesisVoice | null = null;
+
+    // 1. Try to use specific voice if requested (e.g. from settings)
+    if (mergedOptions.voiceURI) {
+      voice = this.cachedVoices.find(v => v.voiceURI === mergedOptions.voiceURI) || null;
+      if (voice) {
+        console.log(`✅ Using selected voice: ${voice.name} (${voice.lang})`);
+      } else {
+        console.warn(`⚠️ Requested voice URI '${mergedOptions.voiceURI}' not found, falling back to auto-detection.`);
+      }
+    }
+
+    // 2. Fallback to auto-detection if no specific voice or voice not found
+    if (!voice) {
+       voice = this.findSpanishVoice(mergedOptions.voiceVariant);
+    }
+
     if (voice) {
       utterance.voice = voice;
       utterance.lang = voice.lang; // Use the actual voice language

@@ -28,4 +28,10 @@ export interface IVocabularyRepository {
    * @param searchTerm - The search query
    */
   searchWords(searchTerm: string): Promise<Word[]>;
+
+  /**
+   * Adds a new word to the vocabulary
+   * @param word - The word to add (without ID)
+   */
+  addWord(word: Omit<Word, 'id'>): Promise<Word>;
 }

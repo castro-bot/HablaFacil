@@ -29,7 +29,7 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
 
   const colorClass = CATEGORY_COLORS[word.category] ?? 'bg-gray-100 border-gray-400 hover:bg-gray-200';
   const emoji = CATEGORY_EMOJIS[word.category] ?? '💬';
-  
+
   // Mostrar imagen si existe URL y no ha dado error
   const showImage = word.symbolUrl && !imageError;
 
@@ -43,7 +43,7 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
       className={`
         ${colorClass}
         relative flex flex-col items-center justify-center
-        min-h-[110px] md:min-h-[130px] p-2 
+        min-h-[110px] md:min-h-[130px] p-2
         rounded-xl border-2 shadow-sm
         transition-all duration-200 ease-in-out
         hover:shadow-md hover:scale-105
@@ -56,26 +56,32 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
     >
       <span className="absolute top-1 left-1 text-xs text-gray-500 opacity-60">⋮⋮</span>
 
-      {/* --- AQUÍ ESTÁ LA CLAVE PARA QUE SE VEAN LAS IMÁGENES --- */}
+      {/* Symbol Image with Fallback */}
       {showImage ? (
-        <img 
-          src={word.symbolUrl} 
+        <img
+          src={word.symbolUrl}
           alt={word.spanish}
           loading="lazy"
-          referrerPolicy="no-referrer" // <--- ESTO EVITA BLOQUEOS 403/404
+          referrerPolicy="no-referrer"
           onError={() => setImageError(true)}
-          className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1 pointer-events-none select-none" 
+          className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1 drop-shadow-sm pointer-events-none select-none transition-transform group-hover:scale-110"
         />
       ) : (
-        <span className="text-3xl md:text-4xl mb-1 select-none" role="img">
+        <span
+          className="text-3xl md:text-4xl mb-1 select-none"
+          role="img"
+          aria-hidden="true"
+        >
           {emoji}
         </span>
       )}
 
+      {/* Spanish word */}
       <span className="text-sm md:text-base font-bold text-gray-900 text-center leading-tight">
         {word.spanish}
       </span>
 
+      {/* English translation */}
       {showTranslation && (
         <span className="text-[10px] md:text-xs text-gray-600 text-center mt-0.5 font-medium">
           {word.english}

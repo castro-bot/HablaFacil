@@ -31,11 +31,18 @@ ALTER TABLE locations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE words ENABLE ROW LEVEL SECURITY;
 
 -- Step 4: Create policies for public read access
+-- Step 4: Create policies for public read access
+DROP POLICY IF EXISTS "Allow public read access on locations" ON locations;
 CREATE POLICY "Allow public read access on locations" ON locations
   FOR SELECT USING (true);
 
+DROP POLICY IF EXISTS "Allow public read access on words" ON words;
 CREATE POLICY "Allow public read access on words" ON words
   FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow public insert access on words" ON words;
+CREATE POLICY "Allow public insert access on words" ON words
+  FOR INSERT WITH CHECK (true);
 
 -- =============================================
 -- SEED DATA: Locations

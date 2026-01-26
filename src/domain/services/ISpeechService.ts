@@ -47,6 +47,9 @@ export interface SpeechOptions {
 
   /** Volume (0 to 1, default 1) */
   volume?: number;
+
+  /** Specific voice URI/ID to use (overrides variant) */
+  voiceURI?: string;
 }
 
 /**
@@ -74,4 +77,5 @@ export const DEFAULT_SPEECH_OPTIONS: Required<SpeechOptions> = {
   rate: 1.0,
   pitch: 1.0,
   volume: 1.0,
+  voiceURI: '',
 };
