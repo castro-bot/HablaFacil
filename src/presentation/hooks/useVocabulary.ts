@@ -123,6 +123,26 @@ export function useVocabulary(currentLocationId: string = 'all') {
     return allWords.find((word) => word.id === id);
   };
 
+  // Add new word
+  const addNewWord = async (word: Omit<Word, 'id'>): Promise<void> => {
+    try {
+      let newWord: Word;
+      if (dataSource === 'supabase') {
+        newWord = await vocabularyRepository.addWord(word);
+      } else {
+        // Mock add for local fallback
+        const id = `local_${Date.now()}`;
+        newWord = { ...word, id } as Word;
+        console.warn('⚠️ Adding word to local state only (not persisted)');
+      }
+
+      setAllWords(prev => [newWord, ...prev]);
+    } catch (err) {
+      console.error('Error adding word:', err);
+      throw err;
+    }
+  };
+
   return {
     allWords,
     filteredWords,
@@ -133,6 +153,7 @@ export function useVocabulary(currentLocationId: string = 'all') {
     dataSource,
     searchWords,
     getWordById,
+    addNewWord,
     totalCount: allWords.length,
     filteredCount: filteredWords.length,
   };

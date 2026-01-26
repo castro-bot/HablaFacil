@@ -61,8 +61,25 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
       {/* Drag indicator */}
       <span className="absolute top-1 left-1 text-xs text-gray-400 opacity-60">⋮⋮</span>
 
-      {/* Symbol placeholder */}
-      <span className="text-3xl md:text-4xl mb-1" role="img" aria-hidden="true">
+      {/* Symbol Image or Fallback Emoji */}
+      {word.symbolUrl ? (
+        <img
+          src={word.symbolUrl}
+          alt=""
+          className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1 drop-shadow-sm transition-transform group-hover:scale-110"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+          }}
+        />
+      ) : null}
+
+      {/* Fallback Emoji (hidden if image loads successfully) */}
+      <span
+        className={`text-3xl md:text-4xl mb-1 ${word.symbolUrl ? 'hidden' : ''}`}
+        role="img"
+        aria-hidden="true"
+      >
         {emoji}
       </span>
 

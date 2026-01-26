@@ -107,4 +107,37 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
 
     return (data as WordRow[]).map(this.mapRowToWord);
   }
+  async addWord(word: Omit<Word, 'id'>): Promise<Word> {
+    // Generate a slug-like ID from Spanish text + random suffix to ensure uniqueness
+    const slug = word.spanish
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+      .replace(/[^a-z0-9]/g, '_');
+
+    const id = `${slug}_${Math.random().toString(36).substring(2, 7)}`;
+
+    const row: WordRow = {
+      id,
+      spanish: word.spanish,
+      english: word.english,
+      category: word.category,
+      locations: word.locations,
+      symbol_url: word.symbolUrl,
+      audio_url: word.audioUrl ?? null,
+      frequency: word.frequency,
+    };
+
+    const { data, error } = await supabase
+      .from(Tables.WORDS)
+      .insert(row)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error adding word:', error);
+      throw error;
+    }
+
+    return this.mapRowToWord(data as WordRow);
+  }
 }
