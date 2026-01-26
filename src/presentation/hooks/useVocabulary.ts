@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { type Word, WordFrequency, wordBelongsToLocation, validateCategory, validateFrequency } from '../../domain/entities';
-import { SupabaseVocabularyRepository } from '../../infrastructure/supabase';
+// import { SupabaseVocabularyRepository } from '../../infrastructure/supabase'; // Comentamos esto por ahora
 import vocabularyData from '../../data/vocabulary.json';
 
 /**
@@ -34,12 +34,12 @@ function transformToWord(raw: RawVocabularyItem): Word {
   };
 }
 
-// Singleton repository instance
-const vocabularyRepository = new SupabaseVocabularyRepository();
+// Singleton repository instance (Comentado temporalmente)
+// const vocabularyRepository = new SupabaseVocabularyRepository();
 
 /**
  * Custom hook for vocabulary management
- * Loads from Supabase with local JSON fallback
+ * FORZADO A MODO LOCAL PARA VER PICTOGRAMAS ARASAAC
  */
 export function useVocabulary(currentLocationId: string = 'all') {
   const [allWords, setAllWords] = useState<Word[]>([]);
@@ -47,27 +47,38 @@ export function useVocabulary(currentLocationId: string = 'all') {
   const [error, setError] = useState<string | null>(null);
   const [dataSource, setDataSource] = useState<'supabase' | 'local' | null>(null);
 
-  // Load vocabulary on mount - try Supabase first, fallback to local
+  // Load vocabulary on mount
   useEffect(() => {
     async function loadVocabulary() {
       setIsLoading(true);
       setError(null);
 
       try {
-        // Try loading from Supabase
-        const words = await vocabularyRepository.getAllWords();
+        // === MODO DESARROLLO: FORZAR DATOS LOCALES ===
+        // Estamos ignorando Supabase a propósito para ver los cambios del JSON
+        console.log('🔌 Forzando modo LOCAL para cargar pictogramas ARASAAC...');
+        
+        // Simular un pequeño delay para que se sienta real (opcional)
+        await new Promise(resolve => setTimeout(resolve, 100));
 
+        const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
+        setAllWords(words);
+        setDataSource('local');
+        console.log(`✅ Cargadas ${words.length} palabras desde vocabulary.json`);
+
+        /* // --- CÓDIGO ORIGINAL DE SUPABASE (GUARDADO PARA DESPUÉS) ---
+        const words = await vocabularyRepository.getAllWords();
         if (words.length > 0) {
           setAllWords(words);
           setDataSource('supabase');
-          console.log(`✅ Loaded ${words.length} words from Supabase`);
         } else {
-          // Fallback to local JSON if Supabase returns empty
           throw new Error('No words in Supabase, using local fallback');
         }
+        */
+
       } catch (err) {
-        // Fallback to local JSON
-        console.warn('⚠️ Supabase failed, using local vocabulary:', err);
+        console.warn('⚠️ Error loading vocabulary:', err);
+        // Fallback de seguridad (aunque arriba ya forzamos local)
         const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
         setAllWords(words);
         setDataSource('local');
@@ -158,4 +169,3 @@ export function useVocabulary(currentLocationId: string = 'all') {
     filteredCount: filteredWords.length,
   };
 }
-
