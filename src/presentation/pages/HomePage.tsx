@@ -1,166 +1,153 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useVocabulary, useLocations } from '../hooks';
+import { useVocabulary } from '../hooks';
 import { SymbolGrid } from '../components/SymbolGrid';
 import { SentenceBuilder } from '../components/SentenceBuilder';
-import { LocationSelector } from '../components/LocationSelector';
 import { AddWordModal } from '../components/AddWordModal';
 import { SettingsModal } from '../components/SettingsModal';
 
 /**
  * Main home page component
+ * Refactorizado para layout tipo "Dashboard"
  */
 export function HomePage() {
-  const { state, addWord, removeLastWord, clearSentence, setLocation } = useAppContext();
-  const { filteredWords, isLoading: vocabLoading, error: vocabError, dataSource, addNewWord, searchWords } = useVocabulary(state.currentLocationId);
-  const { locations, isLoading: locationsLoading, error: locationsError } = useLocations();
+  // 1. LIMPIEZA: Quitamos 'setLocation' que ya no se usa
+  const { state, addWord, removeLastWord, clearSentence } = useAppContext();
+  
+  // 2. LIMPIEZA: Quitamos 'useLocations' completo ya que borramos el selector
+  const { filteredWords, isLoading, error: vocabError, dataSource, addNewWord, searchWords } = useVocabulary(state.currentLocationId);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  const isLoading = vocabLoading || locationsLoading;
-  const hasError = vocabError || locationsError;
-
+  // Lógica de búsqueda
   const displayWords = searchTerm ? searchWords(searchTerm) : filteredWords;
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="h-screen w-full flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4" />
-          <p className="text-lg text-gray-600">Cargando vocabulario...</p>
+          <p className="text-lg text-gray-600 font-medium">Cargando tu voz...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      {/* Error Banner */}
-      {hasError && (
-        <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
-          <p className="font-bold">⚠️ Error de conexión</p>
-          <p className="text-sm">Usando datos locales. {vocabError || locationsError}</p>
-        </div>
-      )}
-
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-20 transition-all">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="h-screen w-full flex flex-col bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
+      
+      {/* HEADER */}
+      <header className="shrink-0 bg-white shadow-sm z-20">
+        <div className="max-w-7xl mx-auto px-4 py-2 md:py-3">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            
+            {/* Logo y Configuración */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 select-none">
                   🗣️ HablaFácil
                 </h1>
                 <button
                   onClick={() => setIsSettingsOpen(true)}
-                  className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all"
                   title="Configuración"
                 >
                   ⚙️
                 </button>
               </div>
-
-              {/* Mobile Stats/Status */}
-              <div className="md:hidden flex items-center gap-2">
+              
+              {/* Indicador Offline (Móvil) */}
+              <div className="md:hidden">
                  {dataSource === 'local' && (
-                  <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                    📦 Offline
+                  <span className="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full font-bold border border-yellow-200">
+                    OFFLINE
                   </span>
                 )}
               </div>
             </div>
 
+            {/* Barra de Búsqueda */}
             <div className="flex items-center gap-3 flex-1 md:justify-end">
-              {/* Search Bar */}
-              <div className="relative flex-1 max-w-md">
+              <div className="relative flex-1 max-w-md group">
                 <input
                   type="text"
                   placeholder="🔍 Buscar palabra..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-4 pr-10 py-2 rounded-full border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none bg-gray-50/50 focus:bg-white transition-all"
+                  className="w-full pl-10 pr-10 py-2 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all shadow-sm"
                 />
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors">
+                  🔍
+                </span>
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 bg-gray-200 hover:bg-gray-300 rounded-full w-5 h-5 flex items-center justify-center text-xs"
                   >
                     ✕
                   </button>
                 )}
               </div>
 
-               {/* Add Word Button */}
+               {/* Botón Crear */}
                <button
                 onClick={() => setIsAddModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors shadow-sm whitespace-nowrap"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white border border-blue-100 text-blue-600 hover:bg-blue-50 hover:border-blue-300 rounded-xl font-medium transition-all shadow-sm"
               >
                 <span>➕</span>
-                <span className="hidden sm:inline">Palabra</span>
+                <span>Crear</span>
               </button>
-
-              <div className="hidden md:flex items-center gap-3">
-                {dataSource === 'local' && (
-                  <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">
-                    📦 Offline
-                  </span>
-                )}
-                <span className="text-sm text-gray-500 font-medium">
-                  {displayWords.length}
-                </span>
-              </div>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-4 pb-[280px] md:pb-[300px]">
-        {/* Location Selector (Hide if searching to reduce clutter?) -> User might want to search within location. Keep it. */}
-        <section className={`mb-4 transition-all duration-300 ${searchTerm ? 'opacity-50 hover:opacity-100' : ''}`} aria-label="Selector de ubicación">
-          <LocationSelector
-            locations={locations}
-            currentLocationId={state.currentLocationId}
-            onLocationChange={setLocation}
-          />
-        </section>
+      {/* Error Banner */}
+      {vocabError && (
+        <div className="shrink-0 bg-red-50 border-b border-red-100 px-4 py-2 text-center text-red-600 text-sm">
+          ⚠️ Modo sin conexión: {vocabError}
+        </div>
+      )}
 
-        {/* Symbol Grid */}
-        <section aria-label="Vocabulario">
-          {displayWords.length > 0 ? (
+      {/* MAIN (ÁREA CENTRAL) */}
+      <main className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar relative">
+        <div className="max-w-7xl mx-auto h-full flex flex-col">
+          
+          <section className="flex-1 min-h-0" aria-label="Vocabulario">
             <SymbolGrid
               words={displayWords}
               showTranslations={state.preferences.showTranslations}
-              groupByCategory={!searchTerm} // Disable grouping when searching for flat list? Or keep it? Flat list is usually better for search results.
+              isSearching={!!searchTerm}
             />
-          ) : (
-             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No se encontraron palabras para "{searchTerm}"</p>
-              <button
-                onClick={() => setIsAddModalOpen(true)}
-                className="mt-4 text-blue-600 hover:underline"
-              >
-                ¿Quieres agregarla?
-              </button>
-            </div>
-          )}
-        </section>
+
+            {searchTerm && displayWords.length === 0 && (
+               <div className="text-center py-12 bg-white/50 rounded-2xl border-2 border-dashed border-gray-200 mt-4">
+                <p className="text-gray-500 text-lg mb-2">No encontramos "{searchTerm}"</p>
+                <button
+                  onClick={() => setIsAddModalOpen(true)}
+                  className="text-blue-600 font-semibold hover:underline"
+                >
+                  + Crear nueva palabra
+                </button>
+              </div>
+            )}
+          </section>
+        </div>
       </main>
 
-      {/* Sentence Builder */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-4 shadow-lg z-30">
-        <div className="max-w-7xl mx-auto">
-          <SentenceBuilder
-            sentence={state.sentence}
-            onAddWord={addWord}
-            onRemoveLastWord={removeLastWord}
-            onClear={clearSentence}
-          />
-        </div>
+      {/* FOOTER */}
+      <footer className="shrink-0 z-30">
+        <SentenceBuilder
+          sentence={state.sentence}
+          onAddWord={addWord}
+          onRemoveLastWord={removeLastWord}
+          onClear={clearSentence}
+        />
       </footer>
 
+      {/* Modales */}
       <AddWordModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}

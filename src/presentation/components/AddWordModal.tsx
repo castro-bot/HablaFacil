@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { WordCategory, WordFrequency, CATEGORY_LABELS } from '../../domain/entities/Word';
-import { type Word } from '../../domain/entities/Word';
+// Importamos 'type' para evitar conflictos, y los valores por separado
+import { 
+  type Word, 
+  type WordCategory, 
+  WordFrequency, 
+  CATEGORY_LABELS 
+} from '../../domain/entities';
 
 interface AddWordModalProps {
   isOpen: boolean;
@@ -11,7 +16,8 @@ interface AddWordModalProps {
 export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
   const [spanish, setSpanish] = useState('');
   const [english, setEnglish] = useState('');
-  const [category, setCategory] = useState<WordCategory>(WordCategory.SUSTANTIVOS);
+  // Inicializamos con el valor de texto 'nouns' directamente
+  const [category, setCategory] = useState<WordCategory>('nouns');
   const [symbolUrl, setSymbolUrl] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSearchingImages, setIsSearchingImages] = useState(false);
@@ -28,19 +34,18 @@ export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
         `https://symbotalkapiv1.azurewebsites.net/search/?name=${encodeURIComponent(spanish)}&lang=es&repo=all&limit=8`
       );
       const data = await response.json();
-      // Only take results that have a valid 'link' or 'url' (SymboTalk format is list of objects)
-      // SymboTalk format: Array of { id, name, link, ... }
+      
       if (Array.isArray(data)) {
         const results = data.map((item: any) => ({
           id: item.id?.toString() || Math.random().toString(),
-          url: item.link || '', // 'link' seems to be the property based on typical matching, will verify if empty
+          url: item.link || item.url || '', 
           label: item.name
         })).filter(item => item.url);
         setImageResults(results);
       }
     } catch (error) {
       console.error('Error searching images:', error);
-      alert('Error searching for symbols');
+      alert('Error buscando símbolos');
     } finally {
       setIsSearchingImages(false);
     }
@@ -54,15 +59,19 @@ export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
         spanish,
         english,
         category,
-        locations: ['all'], // Default to all locations
-        symbolUrl: symbolUrl || `https://ui-avatars.com/api/?name=${spanish}&background=random`, // Fallback
+        // --- CORRECCIÓN AQUÍ ---
+        // Cambiamos "locations: ['all']" por "locationId: 'all'" para coincidir con tu archivo Word.ts
+        locationId: 'all', 
+        // -----------------------
+        symbolUrl: symbolUrl || `https://ui-avatars.com/api/?name=${spanish}&background=random`, 
         frequency: WordFrequency.MEDIUM,
       });
       onClose();
+      
       // Reset form
       setSpanish('');
       setEnglish('');
-      setCategory(WordCategory.SUSTANTIVOS);
+      setCategory('nouns');
       setSymbolUrl('');
       setImageResults([]);
     } catch (error) {
@@ -155,7 +164,7 @@ export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
               </button>
             </div>
 
-            {/* Image Results */}
+            {/* Resultados de búsqueda de imágenes */}
             {imageResults.length > 0 && (
               <div className="mt-3 grid grid-cols-4 gap-2 border rounded-lg p-2 bg-gray-50 max-h-40 overflow-y-auto">
                 {imageResults.map((result) => (

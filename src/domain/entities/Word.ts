@@ -1,183 +1,78 @@
-/**
- * Word Category enum for categorizing vocabulary
- * Following Clean Code: Using enums for related constants
- */
-export enum WordCategory {
-  VERBOS = 'verbos',
-  SUSTANTIVOS = 'sustantivos',
-  ADJETIVOS = 'adjetivos',
-  PRONOMBRES = 'pronombres',
-  PREGUNTAS = 'preguntas',
-  SOCIALES = 'sociales',
-  NUMEROS = 'numeros',
-  COLORES = 'colores',
-  TIEMPO = 'tiempo',
-  EMOCIONES = 'emociones',
-}
+// src/domain/entities/Word.ts
 
-/**
- * Word Frequency enum for prioritizing vocabulary display
- */
-export enum WordFrequency {
-  HIGH = 'high',
-  MEDIUM = 'medium',
-  LOW = 'low',
-}
+export const WordFrequency = { HIGH: 3, MEDIUM: 2, LOW: 1 } as const;
+// Definimos el tipo explícitamente para evitar errores de asignación
+export type WordFrequency = typeof WordFrequency[keyof typeof WordFrequency];
 
-/**
- * Category display labels with emojis (Spanish UI)
- */
+export type WordCategory = 
+  | 'pronouns' | 'verbs' | 'social' | 'questions' 
+  | 'emotions' | 'adjectives' | 'numbers' | 'colors' | 'time'
+  | 'body' | 'home' | 'school' | 'food' | 'clothing' 
+  | 'vehicles' | 'nature' | 'places' | 'animals' 
+  | 'nouns';
+
 export const CATEGORY_LABELS: Record<WordCategory, string> = {
-  [WordCategory.VERBOS]: '🏃 Verbos',
-  [WordCategory.SUSTANTIVOS]: '📦 Sustantivos',
-  [WordCategory.ADJETIVOS]: '✨ Adjetivos',
-  [WordCategory.PRONOMBRES]: '👤 Pronombres',
-  [WordCategory.PREGUNTAS]: '❓ Preguntas',
-  [WordCategory.SOCIALES]: '👋 Sociales',
-  [WordCategory.NUMEROS]: '🔢 Números',
-  [WordCategory.COLORES]: '🎨 Colores',
-  [WordCategory.TIEMPO]: '⏰ Tiempo',
-  [WordCategory.EMOCIONES]: '😊 Emociones',
+  pronouns: 'Personas', verbs: 'Acciones', social: 'Social', questions: 'Preguntas',
+  emotions: 'Sentir', adjectives: 'Describir', numbers: 'Números', colors: 'Colores', time: 'Tiempo',
+  body: 'Cuerpo', home: 'Casa', school: 'Escuela', food: 'Comida', clothing: 'Ropa',
+  vehicles: 'Vehículos', nature: 'Naturaleza', places: 'Lugares', animals: 'Animales',
+  nouns: 'Cosas'
 };
 
-/**
- * Category display order for consistent UI rendering
- */
+export const CATEGORY_IMAGES: Record<WordCategory, string> = {
+  pronouns: 'https://static.arasaac.org/pictograms/5432/5432_300.png',
+  verbs: 'https://static.arasaac.org/pictograms/8296/8296_300.png',
+  social: 'https://static.arasaac.org/pictograms/6868/6868_300.png',
+  questions: 'https://static.arasaac.org/pictograms/10959/10959_300.png',
+  emotions: 'https://static.arasaac.org/pictograms/2261/2261_300.png',
+  adjectives: 'https://static.arasaac.org/pictograms/33827/33827_300.png',
+  numbers: 'https://static.arasaac.org/pictograms/36044/36044_300.png',
+  colors: 'https://static.arasaac.org/pictograms/32338/32338_300.png',
+  time: 'https://static.arasaac.org/pictograms/32415/32415_300.png',
+  body: 'https://static.arasaac.org/pictograms/33866/33866_300.png',
+  home: 'https://static.arasaac.org/pictograms/2843/2843_300.png',
+  school: 'https://static.arasaac.org/pictograms/2330/2330_300.png',
+  food: 'https://static.arasaac.org/pictograms/5842/5842_300.png',
+  clothing: 'https://static.arasaac.org/pictograms/26107/26107_300.png',
+  vehicles: 'https://static.arasaac.org/pictograms/33931/33931_300.png',
+  nature: 'https://static.arasaac.org/pictograms/2311/2311_300.png',
+  places: 'https://static.arasaac.org/pictograms/3440/3440_300.png',
+  animals: 'https://static.arasaac.org/pictograms/2573/2573_300.png',
+  nouns: 'https://static.arasaac.org/pictograms/6382/6382_300.png'
+};
+
 export const CATEGORY_ORDER: WordCategory[] = [
-  WordCategory.PRONOMBRES,
-  WordCategory.VERBOS,
-  WordCategory.SOCIALES,
-  WordCategory.PREGUNTAS,
-  WordCategory.SUSTANTIVOS,
-  WordCategory.EMOCIONES,
-  WordCategory.ADJETIVOS,
-  WordCategory.NUMEROS,
-  WordCategory.COLORES,
-  WordCategory.TIEMPO,
+  'pronouns', 'verbs', 'social', 'questions', 
+  'emotions', 'adjectives', 'food', 'home', 
+  'school', 'body', 'places', 'clothing', 
+  'vehicles', 'nature', 'time', 'colors', 'numbers', 
+  'animals', 'nouns'
 ];
 
-/**
- * Category color classes for styling (Tailwind)
- */
 export const CATEGORY_COLORS: Record<WordCategory, string> = {
-  [WordCategory.VERBOS]: 'bg-green-100 border-green-400 hover:bg-green-200',
-  [WordCategory.SUSTANTIVOS]: 'bg-yellow-100 border-yellow-400 hover:bg-yellow-200',
-  [WordCategory.ADJETIVOS]: 'bg-blue-100 border-blue-400 hover:bg-blue-200',
-  [WordCategory.PRONOMBRES]: 'bg-purple-100 border-purple-400 hover:bg-purple-200',
-  [WordCategory.PREGUNTAS]: 'bg-pink-100 border-pink-400 hover:bg-pink-200',
-  [WordCategory.SOCIALES]: 'bg-orange-100 border-orange-400 hover:bg-orange-200',
-  [WordCategory.NUMEROS]: 'bg-cyan-100 border-cyan-400 hover:bg-cyan-200',
-  [WordCategory.COLORES]: 'bg-rose-100 border-rose-400 hover:bg-rose-200',
-  [WordCategory.TIEMPO]: 'bg-indigo-100 border-indigo-400 hover:bg-indigo-200',
-  [WordCategory.EMOCIONES]: 'bg-red-100 border-red-400 hover:bg-red-200',
+  pronouns: 'bg-blue-100', verbs: 'bg-green-100', social: 'bg-yellow-100',
+  questions: 'bg-purple-100', nouns: 'bg-orange-100', emotions: 'bg-pink-100',
+  adjectives: 'bg-teal-100', numbers: 'bg-indigo-100', animals: 'bg-emerald-100', 
+  food: 'bg-red-100', clothing: 'bg-cyan-100', time: 'bg-gray-100', colors: 'bg-rose-100',
+  body: 'bg-stone-100', home: 'bg-amber-100', vehicles: 'bg-slate-100',
+  school: 'bg-violet-100', places: 'bg-sky-100', nature: 'bg-lime-100'
 };
 
-/**
- * Category emoji mapping for symbol placeholders
- */
 export const CATEGORY_EMOJIS: Record<WordCategory, string> = {
-  [WordCategory.VERBOS]: '🏃',
-  [WordCategory.SUSTANTIVOS]: '📦',
-  [WordCategory.ADJETIVOS]: '✨',
-  [WordCategory.PRONOMBRES]: '👤',
-  [WordCategory.PREGUNTAS]: '❓',
-  [WordCategory.SOCIALES]: '👋',
-  [WordCategory.NUMEROS]: '🔢',
-  [WordCategory.COLORES]: '🎨',
-  [WordCategory.TIEMPO]: '⏰',
-  [WordCategory.EMOCIONES]: '😊',
+   pronouns: '👤', verbs: '🏃', social: '👋', questions: '❓',
+   nouns: '📦', emotions: '😊', adjectives: '✨', numbers: '🔢',
+   colors: '🎨', time: '⏰', body: '🦵', home: '🏠', school: '🎒',
+   food: '🍎', clothing: '👕', vehicles: '🚗', nature: '🌳', places: '🏙️',
+   animals: '🐶'
 };
 
-/**
- * Validates and converts a string to WordCategory with fallback
- * Provides runtime type safety for external data (database, JSON)
- */
-export function validateCategory(value: string): WordCategory {
-  const validCategories = Object.values(WordCategory);
-  if (validCategories.includes(value as WordCategory)) {
-    return value as WordCategory;
-  }
-  console.warn(`Invalid category "${value}", defaulting to SUSTANTIVOS`);
-  return WordCategory.SUSTANTIVOS;
-}
-
-/**
- * Validates and converts a string to WordFrequency with fallback
- */
-export function validateFrequency(value: string): WordFrequency {
-  const validFrequencies = Object.values(WordFrequency);
-  if (validFrequencies.includes(value as WordFrequency)) {
-    return value as WordFrequency;
-  }
-  return WordFrequency.MEDIUM;
-}
-
-/**
- * Word entity - represents a vocabulary word in the AAC system
- * Domain entity with no external dependencies (Clean Architecture)
- */
 export interface Word {
-  /** Unique identifier for the word */
-  readonly id: string;
-
-  /** Spanish word or phrase */
-  readonly spanish: string;
-
-  /** English translation */
-  readonly english: string;
-
-  /** Grammatical/semantic category */
-  readonly category: WordCategory;
-
-  /** Location contexts where this word is relevant */
-  readonly locations: string[];
-
-  /** URL to the symbol/icon image */
-  readonly symbolUrl: string;
-
-  /** Optional URL to pre-cached audio file */
-  readonly audioUrl?: string;
-
-  /** Usage frequency for prioritization */
-  readonly frequency: WordFrequency;
+  id: string; spanish: string; english: string; category: WordCategory;
+  symbolUrl?: string; locationId?: string; frequency: WordFrequency;
 }
 
-/**
- * Factory function to create a Word entity
- * Ensures all required properties are provided with proper defaults
- */
-export function createWord(props: {
-  id: string;
-  spanish: string;
-  english: string;
-  category: WordCategory;
-  locations?: string[];
-  symbolUrl?: string;
-  audioUrl?: string;
-  frequency?: WordFrequency;
-}): Word {
-  return {
-    id: props.id,
-    spanish: props.spanish,
-    english: props.english,
-    category: props.category,
-    locations: props.locations ?? ['all'],
-    symbolUrl: props.symbolUrl ?? '',
-    audioUrl: props.audioUrl,
-    frequency: props.frequency ?? WordFrequency.MEDIUM,
-  };
-}
-
-/**
- * Predicate to check if a word belongs to a specific location
- */
-export function wordBelongsToLocation(word: Word, locationId: string): boolean {
-  return word.locations.includes('all') || word.locations.includes(locationId);
-}
-
-/**
- * Predicate to check if a word matches a category
- */
-export function wordMatchesCategory(word: Word, category: WordCategory): boolean {
-  return word.category === category;
-}
+export const createWord = (word: Omit<Word, 'id'>): Word => ({ ...word, id: crypto.randomUUID() });
+export const wordBelongsToLocation = (word: Word, locationId: string | null) => !locationId || word.locationId === locationId;
+export const wordMatchesCategory = (word: Word, category: WordCategory) => word.category === category;
+export const validateCategory = (category: string): category is WordCategory => category in CATEGORY_LABELS;
+export const validateFrequency = (freq: number) => freq >= 0;
