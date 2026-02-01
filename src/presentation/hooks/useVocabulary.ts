@@ -28,6 +28,12 @@ const ID_CATEGORY_MAP: Record<string, string> = {
   'escribir': 'verbs', 'caminar': 'verbs', 'correr': 'verbs', 'sentarse': 'verbs',
   'levantarse': 'verbs', 'esperar': 'verbs', 'terminar': 'verbs', 'empezar': 'verbs',
   'abrir': 'verbs', 'cerrar': 'verbs', 'comprar': 'verbs', 'pagar': 'verbs',
+  // VERBOS CONJUGADOS
+  'quieres': 'verbs', 'quiere': 'verbs', 'queremos': 'verbs', 'quieren': 'verbs',
+  'necesitas': 'verbs', 'necesita': 'verbs', 'necesitamos': 'verbs', 'necesitan': 'verbs',
+  'tienes': 'verbs', 'tiene': 'verbs', 'tenemos': 'verbs', 'tienen': 'verbs',
+  'puedes': 'verbs', 'puede': 'verbs', 'podemos': 'verbs', 'pueden': 'verbs',
+  'te_gusta': 'verbs', 'le_gusta': 'verbs', 'nos_gusta': 'verbs', 'les_gusta': 'verbs',
 
   // SOCIAL
   'si': 'social', 'no': 'social', 'hola': 'social', 'adios': 'social',

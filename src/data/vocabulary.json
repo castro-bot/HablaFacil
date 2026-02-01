@@ -242,6 +242,106 @@
     "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
   },
   {
+    "id": "quieres", "spanish": "Quieres", "english": "you want", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5441?download=false"
+  },
+  {
+    "id": "quiere", "spanish": "Quiere", "english": "wants", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5441?download=false"
+  },
+  {
+    "id": "queremos", "spanish": "Queremos", "english": "we want", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5441?download=false"
+  },
+  {
+    "id": "quieren", "spanish": "Quieren", "english": "they want", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/5441?download=false"
+  },
+  {
+    "id": "necesitas", "spanish": "Necesitas", "english": "you need", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37160?download=false"
+  },
+  {
+    "id": "necesita", "spanish": "Necesita", "english": "needs", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37160?download=false"
+  },
+  {
+    "id": "necesitamos", "spanish": "Necesitamos", "english": "we need", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37160?download=false"
+  },
+  {
+    "id": "necesitan", "spanish": "Necesitan", "english": "they need", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37160?download=false"
+  },
+  {
+    "id": "tienes", "spanish": "Tienes", "english": "you have", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32761?download=false"
+  },
+  {
+    "id": "tiene", "spanish": "Tiene", "english": "has", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32761?download=false"
+  },
+  {
+    "id": "tenemos", "spanish": "Tenemos", "english": "we have", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32761?download=false"
+  },
+  {
+    "id": "tienen", "spanish": "Tienen", "english": "they have", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32761?download=false"
+  },
+  {
+    "id": "puedes", "spanish": "Puedes", "english": "you can", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
+  },
+  {
+    "id": "puede", "spanish": "Puede", "english": "can", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
+  },
+  {
+    "id": "podemos", "spanish": "Podemos", "english": "we can", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
+  },
+  {
+    "id": "pueden", "spanish": "Pueden", "english": "they can", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6544?download=false"
+  },
+  {
+    "id": "te_gusta", "spanish": "Te gusta", "english": "you like", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37825?download=false"
+  },
+  {
+    "id": "le_gusta", "spanish": "Le gusta", "english": "likes", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37825?download=false"
+  },
+  {
+    "id": "nos_gusta", "spanish": "Nos gusta", "english": "we like", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37825?download=false"
+  },
+  {
+    "id": "les_gusta", "spanish": "Les gusta", "english": "they like", "category": "verbos",
+    "locations": ["all"], "frequency": "medium",
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/37825?download=false"
+  },
+  {
     "id": "ir",
     "spanish": "Ir",
     "english": "go",
@@ -583,7 +683,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": ""
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6285?download=false"
   },
   {
     "id": "buenos_dias",
@@ -616,7 +716,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/9853?download=false"
   },
   {
     "id": "donde_pregunta",
@@ -627,7 +727,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/7764?download=false"
   },
   {
     "id": "cuando_pregunta",
@@ -638,7 +738,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/32874?download=false"
   },
   {
     "id": "quien_pregunta",
@@ -649,7 +749,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/6438?download=false"
   },
   {
     "id": "por_que",
@@ -660,7 +760,7 @@
       "all"
     ],
     "frequency": "high",
-    "symbolUrl": "https://api.arasaac.org/api/pictograms/3418?download=false"
+    "symbolUrl": "https://api.arasaac.org/api/pictograms/36719?download=false"
   },
   {
     "id": "como",
