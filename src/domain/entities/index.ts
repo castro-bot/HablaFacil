@@ -27,3 +27,8 @@ export {
   isSentenceFull,
 } from './Sentence';
 
+export type { QuickPhraseSection, QuickPhraseGroup } from './QuickPhrase';
+export { QUICK_PHRASE_GROUPS } from './QuickPhrase';
+
+export type { SuggestionRule, PhraseTemplate } from './SuggestionEngine';
+export { SUGGESTION_RULES, PHRASE_TEMPLATES, getSuggestionsForSentence } from './SuggestionEngine';
