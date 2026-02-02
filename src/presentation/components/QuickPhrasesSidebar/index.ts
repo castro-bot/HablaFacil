@@ -1,0 +1,1 @@
+export { QuickPhrasesSidebar } from './QuickPhrasesSidebar';

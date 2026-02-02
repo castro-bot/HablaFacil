@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { getHybridSpeechService } from '../../infrastructure/speech';
 import type { SpeechOptions, VoiceInfo } from '../../domain/services';
+import { useAppContext } from '../context/AppContext';
 
 /**
  * Custom hook for text-to-speech functionality
@@ -11,6 +12,20 @@ export function useSpeech() {
   const [isAvailable, setIsAvailable] = useState(false);
   const [availableVoices, setAvailableVoices] = useState<VoiceInfo[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  // Get preferences mainly for speech rate and preferred voice
+  // Note: we're using a try/catch here because useSpeech might be used outside of AppProvider context in some theoretical cases,
+  // though in this app it's always inside. But to be safe if useSpeech is used in top level tests or something.
+  // Actually, hooks rule: hooks must be called inside components.
+  // We can assume AppProvider is present if used in pages.
+  // But let's handle the case just in case? No, keep it simple.
+  let preferences: any = {};
+  try {
+     const context = useAppContext();
+     preferences = context.state.preferences;
+  } catch (e) {
+     // fallback if context not found
+  }
 
   // Use ref to store speech service to avoid dependency issues
   const speechServiceRef = useRef(getHybridSpeechService());
@@ -23,7 +38,10 @@ export function useSpeech() {
 
       if (available) {
         const voices = await speechServiceRef.current.getAvailableVoices();
-        setAvailableVoices(voices);
+        // Filter mainly to Spanish/English or just return all?
+        // Let's filter to Spanish and English to avoid overwhelming the user
+        const relevantVoices = voices.filter(v => v.language.startsWith('es') || v.language.startsWith('en'));
+        setAvailableVoices(relevantVoices.length > 0 ? relevantVoices : voices);
       }
     };
 
@@ -41,7 +59,12 @@ export function useSpeech() {
       setIsSpeaking(true);
 
       try {
-        await speechServiceRef.current.speak(text, options);
+        const speakOptions: SpeechOptions = {
+            ...options,
+            rate: preferences.speechRate || 1.0,
+            voiceURI: preferences.selectedVoiceURI || undefined, // Use preference if set
+        };
+        await speechServiceRef.current.speak(text, speakOptions);
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Speech failed';
         setError(errorMessage);
@@ -50,7 +73,7 @@ export function useSpeech() {
         setIsSpeaking(false);
       }
     },
-    []
+    [preferences.speechRate, preferences.selectedVoiceURI]
   );
 
   /**

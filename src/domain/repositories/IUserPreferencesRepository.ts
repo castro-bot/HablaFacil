@@ -19,6 +19,9 @@ export interface UserPreferences {
 
   /** High contrast mode for accessibility */
   highContrastMode: boolean;
+
+  /** URI of the specific voice to use (overrides variant if present) */
+  selectedVoiceURI?: string | null;
 }
 
 /**
@@ -31,6 +34,7 @@ export const DEFAULT_USER_PREFERENCES: UserPreferences = {
   showTranslations: true,
   gridColumns: 4,
   highContrastMode: false,
+  selectedVoiceURI: null,
 };
 
 /**

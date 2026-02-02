@@ -25,6 +25,7 @@ interface AppState {
  */
 type AppAction =
   | { type: 'ADD_WORD'; payload: Word }
+  | { type: 'ADD_MULTIPLE_WORDS'; payload: Word[] }
   | { type: 'REMOVE_LAST_WORD' }
   | { type: 'CLEAR_SENTENCE' }
   | { type: 'SET_LOCATION'; payload: string }
@@ -52,6 +53,14 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return {
         ...state,
         sentence: addWordToSentence(state.sentence, action.payload),
+      };
+    case 'ADD_MULTIPLE_WORDS':
+      return {
+        ...state,
+        sentence: action.payload.reduce(
+          (sent, word) => addWordToSentence(sent, word),
+          state.sentence
+        ),
       };
     case 'REMOVE_LAST_WORD':
       return {
@@ -96,6 +105,7 @@ interface AppContextType {
   dispatch: React.Dispatch<AppAction>;
   // Convenience action creators
   addWord: (word: Word) => void;
+  addMultipleWords: (words: Word[]) => void;
   removeLastWord: () => void;
   clearSentence: () => void;
   setLocation: (locationId: string) => void;
@@ -112,10 +122,41 @@ interface AppProviderProps {
 }
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  // Load initial preferences from localStorage
+  const loadInitialState = (): AppState => {
+    let savedPreferences = DEFAULT_USER_PREFERENCES;
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('user_preferences');
+        if (stored) {
+          savedPreferences = { ...DEFAULT_USER_PREFERENCES, ...JSON.parse(stored) };
+        }
+      } catch (error) {
+        console.warn('Failed to load preferences from localStorage', error);
+      }
+    }
+    return {
+      ...initialState,
+      preferences: savedPreferences,
+    };
+  };
+
+  const [state, dispatch] = useReducer(appReducer, initialState, loadInitialState);
+
+  // Save preferences to localStorage when they change
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('user_preferences', JSON.stringify(state.preferences));
+      } catch (error) {
+        console.error('Failed to save preferences to localStorage', error);
+      }
+    }
+  }, [state.preferences]);
 
   // Convenience action creators
   const addWord = (word: Word) => dispatch({ type: 'ADD_WORD', payload: word });
+  const addMultipleWords = (words: Word[]) => dispatch({ type: 'ADD_MULTIPLE_WORDS', payload: words });
   const removeLastWordAction = () => dispatch({ type: 'REMOVE_LAST_WORD' });
   const clearSentenceAction = () => dispatch({ type: 'CLEAR_SENTENCE' });
   const setLocation = (locationId: string) =>
@@ -127,6 +168,7 @@ export function AppProvider({ children }: AppProviderProps) {
     state,
     dispatch,
     addWord,
+    addMultipleWords,
     removeLastWord: removeLastWordAction,
     clearSentence: clearSentenceAction,
     setLocation,
