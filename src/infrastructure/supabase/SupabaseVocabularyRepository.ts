@@ -1,6 +1,6 @@
 import type { IVocabularyRepository } from '../../domain/repositories/IVocabularyRepository';
-import { type Word, validateCategory, validateFrequency } from '../../domain/entities/Word';
-import { supabase, Tables } from './SupabaseConfig';
+import { type Word, type WordCategory, type WordFrequency, WordFrequency as WF, validateCategory } from '../../domain/entities/Word';
+import { supabase, Tables, isSupabaseConfigured } from './SupabaseConfig';
 
 /**
  * Database row type from Supabase (snake_case)
@@ -10,10 +10,9 @@ interface WordRow {
   spanish: string;
   english: string;
   category: string;
-  locations: string[];
-  symbol_url: string;
-  audio_url: string | null;
-  frequency: string;
+  location_id: string | null;
+  symbol_url: string | null;
+  frequency: number;
 }
 
 /**
@@ -25,22 +24,39 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
    * Maps database row (snake_case) to domain entity (camelCase)
    */
   private mapRowToWord(row: WordRow): Word {
+    // Validate category or fallback to 'nouns'
+    const category: WordCategory = validateCategory(row.category) ? row.category as WordCategory : 'nouns';
+
+    // Validate frequency (1, 2, or 3) or fallback to LOW (1)
+    const validFrequencies = [WF.LOW, WF.MEDIUM, WF.HIGH];
+    const frequency: WordFrequency = validFrequencies.includes(row.frequency as WordFrequency)
+      ? row.frequency as WordFrequency
+      : WF.LOW;
+
     return {
       id: row.id,
       spanish: row.spanish,
       english: row.english,
-      category: validateCategory(row.category),
-      locations: row.locations ?? ['all'],
-      symbolUrl: row.symbol_url ?? '',
-      audioUrl: row.audio_url ?? undefined,
-      frequency: validateFrequency(row.frequency),
+      category,
+      locationId: row.location_id ?? undefined,
+      symbolUrl: row.symbol_url ?? undefined,
+      frequency,
     };
+  }
+
+  /**
+   * Check if Supabase is available
+   */
+  isAvailable(): boolean {
+    return isSupabaseConfigured && supabase !== null;
   }
 
   /**
    * Retrieves all vocabulary words from Supabase
    */
   async getAllWords(): Promise<Word[]> {
+    if (!supabase) return [];
+
     const { data, error } = await supabase
       .from(Tables.WORDS)
       .select('*')
@@ -58,10 +74,12 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
    * Retrieves words filtered by location
    */
   async getWordsByLocation(locationId: string): Promise<Word[]> {
+    if (!supabase) return [];
+
     const { data, error } = await supabase
       .from(Tables.WORDS)
       .select('*')
-      .or(`locations.cs.{${locationId}},locations.cs.{all}`)
+      .or(`location_id.eq.${locationId},location_id.is.null`)
       .order('frequency', { ascending: false });
 
     if (error) {
@@ -76,6 +94,8 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
    * Retrieves a single word by its ID
    */
   async getWordById(wordId: string): Promise<Word | null> {
+    if (!supabase) return null;
+
     const { data, error } = await supabase
       .from(Tables.WORDS)
       .select('*')
@@ -94,6 +114,8 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
    * Searches words by Spanish text (case-insensitive partial match)
    */
   async searchWords(searchTerm: string): Promise<Word[]> {
+    if (!supabase) return [];
+
     const { data, error } = await supabase
       .from(Tables.WORDS)
       .select('*')
@@ -107,7 +129,12 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
 
     return (data as WordRow[]).map(this.mapRowToWord);
   }
+
   async addWord(word: Omit<Word, 'id'>): Promise<Word> {
+    if (!supabase) {
+      throw new Error('Supabase not configured');
+    }
+
     // Generate a slug-like ID from Spanish text + random suffix to ensure uniqueness
     const slug = word.spanish
       .toLowerCase()
@@ -121,9 +148,8 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
       spanish: word.spanish,
       english: word.english,
       category: word.category,
-      locations: word.locations,
-      symbol_url: word.symbolUrl,
-      audio_url: word.audioUrl ?? null,
+      location_id: word.locationId ?? null,
+      symbol_url: word.symbolUrl ?? null,
       frequency: word.frequency,
     };
 

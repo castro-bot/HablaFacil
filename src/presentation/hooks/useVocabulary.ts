@@ -1,6 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { type Word, wordBelongsToLocation, validateCategory } from '../../domain/entities';
+import { SupabaseVocabularyRepository } from '../../infrastructure/supabase/SupabaseVocabularyRepository';
 import vocabularyData from '../../data/vocabulary.json';
+
+// Instancia del repositorio Supabase para guardar palabras
+const supabaseRepository = new SupabaseVocabularyRepository();
 
 const WordFrequency = { HIGH: 3, MEDIUM: 2, LOW: 1 } as const;
 
@@ -119,11 +123,10 @@ function transformToWord(raw: RawVocabularyItem): Word {
     spanish: raw.spanish,
     english: raw.english,
     category: finalCategory,
-    locations: raw.locations,
+    locationId: raw.locations?.[0] !== 'all' ? raw.locations?.[0] : undefined,
     frequency: freqNumber,
     symbolUrl: raw.symbolUrl ?? '',
-    audioUrl: raw.audioUrl,
-  } as unknown as Word;
+  } as Word;
 }
 
 export function useVocabulary(currentLocationId: string = 'all') {
@@ -182,9 +185,24 @@ export function useVocabulary(currentLocationId: string = 'all') {
   };
 
   const addNewWord = async (word: Omit<Word, 'id'>): Promise<void> => {
+    // Verificar si Supabase está disponible
+    if (supabaseRepository.isAvailable()) {
+      try {
+        // Intentar guardar en Supabase primero
+        const savedWord = await supabaseRepository.addWord(word);
+        setAllWords(prev => [savedWord, ...prev]);
+        console.log('✅ Palabra guardada en Supabase:', savedWord.id);
+        return;
+      } catch (error) {
+        console.warn('⚠️ Error guardando en Supabase, guardando localmente:', error);
+      }
+    }
+
+    // Fallback: guardar localmente
     const id = `local_${Date.now()}`;
     const newWord = { ...word, id } as Word;
     setAllWords(prev => [newWord, ...prev]);
+    console.log('💾 Palabra guardada localmente:', id);
   };
 
   return {
