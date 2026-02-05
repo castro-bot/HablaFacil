@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 // Importamos 'type' para evitar conflictos, y los valores por separado
-import { 
-  type Word, 
-  type WordCategory, 
-  WordFrequency, 
-  CATEGORY_LABELS 
+import {
+  type Word,
+  type WordCategory,
+  WordFrequency,
+  CATEGORY_LABELS,
+  CATEGORY_EMOJIS
 } from '../../domain/entities';
 
 interface AddWordModalProps {
@@ -112,10 +113,9 @@ export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Traducción (Inglés) *
+              Traduccion (Ingles) <span className="text-gray-400 font-normal">(Opcional)</span>
             </label>
             <input
-              required
               type="text"
               value={english}
               onChange={(e) => setEnglish(e.target.value)}
@@ -135,7 +135,7 @@ export function AddWordModal({ isOpen, onClose, onAdd }: AddWordModalProps) {
             >
               {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
                 <option key={key} value={key}>
-                  {label}
+                  {CATEGORY_EMOJIS[key as WordCategory]} {label}
                 </option>
               ))}
             </select>

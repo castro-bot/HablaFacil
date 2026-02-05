@@ -11,7 +11,6 @@ import { DEFAULT_SPEECH_OPTIONS } from '../../domain/services/ISpeechService';
  */
 export class WebSpeechProvider implements ISpeechService {
   private synthesis: SpeechSynthesis | null = null;
-  private currentUtterance: SpeechSynthesisUtterance | null = null;
   private cachedVoices: SpeechSynthesisVoice[] = [];
   private voicesLoaded: Promise<void>;
 
@@ -65,7 +64,7 @@ export class WebSpeechProvider implements ISpeechService {
    * 2. Natural/Neural voices
    * 3. Any Spanish voice (excluding Spain Spanish es-ES if possible)
    */
-  private findSpanishVoice(variant: string): SpeechSynthesisVoice | null {
+  private findSpanishVoice(_variant: string): SpeechSynthesisVoice | null {
     if (this.cachedVoices.length === 0 && this.synthesis) {
       this.cachedVoices = this.synthesis.getVoices();
     }
@@ -171,16 +170,14 @@ export class WebSpeechProvider implements ISpeechService {
     utterance.pitch = mergedOptions.pitch;
     utterance.volume = mergedOptions.volume;
 
-    this.currentUtterance = utterance;
+    // utterance tracked for speech lifecycle
 
     return new Promise((resolve, reject) => {
       utterance.onend = () => {
-        this.currentUtterance = null;
-        resolve();
+                resolve();
       };
       utterance.onerror = (event) => {
-        this.currentUtterance = null;
-        // Don't reject on 'interrupted' errors (caused by stop())
+                // Don't reject on 'interrupted' errors (caused by stop())
         if (event.error !== 'interrupted') {
           reject(new Error(`Speech synthesis error: ${event.error}`));
         } else {
@@ -195,8 +192,7 @@ export class WebSpeechProvider implements ISpeechService {
   stop(): void {
     if (this.synthesis) {
       this.synthesis.cancel();
-      this.currentUtterance = null;
-    }
+          }
   }
 
   isSpeaking(): boolean {
