@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useVocabulary, useSuggestions, useQuickPhrases, useSpeech } from '../hooks';
+import { useVocabulary, useAISuggestions, useQuickPhrases, useSpeech } from '../hooks';
 import { SymbolGrid } from '../components/SymbolGrid';
 import { SentenceBuilder } from '../components/SentenceBuilder';
 import { AddWordModal } from '../components/AddWordModal';
@@ -21,7 +21,7 @@ export function HomePage() {
   const { filteredWords, isLoading, error: vocabError, dataSource, addNewWord, searchWords } = useVocabulary(state.currentLocationId);
   const { speak } = useSpeech();
   const { groups: quickPhraseGroups } = useQuickPhrases(filteredWords);
-  const { suggestions } = useSuggestions(state.sentence, filteredWords);
+  const { suggestions, isLoading: suggestionsLoading } = useAISuggestions(state.sentence, filteredWords);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -177,6 +177,7 @@ export function HomePage() {
         onSuggestionClick={handleSuggestionClick}
         onTemplateClick={handleTemplateClick}
         sentenceIsEmpty={isSentenceEmpty(state.sentence)}
+        isLoading={suggestionsLoading}
       />
 
       {/* FOOTER */}

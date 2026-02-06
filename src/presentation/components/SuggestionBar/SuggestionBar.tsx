@@ -9,6 +9,7 @@ interface SuggestionBarProps {
   onSuggestionClick: (word: Word) => void;
   onTemplateClick: (template: PhraseTemplate) => void;
   sentenceIsEmpty: boolean;
+  isLoading?: boolean;
 }
 
 export const SuggestionBar = React.memo(function SuggestionBar({
@@ -17,6 +18,7 @@ export const SuggestionBar = React.memo(function SuggestionBar({
   onSuggestionClick,
   onTemplateClick,
   sentenceIsEmpty,
+  isLoading = false,
 }: SuggestionBarProps) {
   const handleSuggestionClick = useCallback(
     (word: Word) => onSuggestionClick(word),
@@ -44,6 +46,24 @@ export const SuggestionBar = React.memo(function SuggestionBar({
               {template.label}
             </button>
           ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading state
+  if (isLoading && suggestions.length === 0) {
+    return (
+      <div className="shrink-0 bg-gradient-to-r from-green-50 to-emerald-50 border-t border-green-100 px-3 py-2">
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] text-green-600 font-bold shrink-0 uppercase tracking-wider">
+            Pensando
+          </span>
+          <div className="flex gap-1">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          </div>
         </div>
       </div>
     );
