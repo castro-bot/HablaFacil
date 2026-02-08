@@ -55,7 +55,7 @@ const ID_CATEGORY_MAP: Record<string, string> = {
   // CASA (Objetos y Muebles)
   'bano': 'home', 'cama': 'home', 'cocina_lugar': 'home', 'sala': 'home',
   'cuarto': 'home', 'mesa': 'home', 'silla': 'home', 'television': 'home',
-  'musica': 'home', 'telefono': 'home', 
+  'musica': 'home', 'telefono': 'home',
   'juguete': 'home', 'pelota': 'home',
 
   // ESCUELA
@@ -112,10 +112,10 @@ function transformToWord(raw: RawVocabularyItem): Word {
 
   // Usamos el ID para buscar la categoría exacta en el mapa
   const forcedCategory = ID_CATEGORY_MAP[raw.id];
-  
+
   // Si encontramos la categoría en el mapa, la usamos. Si no, fallback a 'nouns'.
-  const finalCategory = forcedCategory && validateCategory(forcedCategory) 
-    ? forcedCategory 
+  const finalCategory = forcedCategory && validateCategory(forcedCategory)
+    ? forcedCategory
     : 'nouns';
 
   return {
@@ -139,13 +139,45 @@ export function useVocabulary(currentLocationId: string = 'all') {
     async function loadVocabulary() {
       setIsLoading(true);
       setError(null);
+
+      // Try Supabase first
+      if (supabaseRepository.isAvailable()) {
+        try {
+          console.log('📡 Fetching vocabulary from Supabase...');
+          const supabaseWords = await supabaseRepository.getAllWords();
+
+          if (supabaseWords.length > 0) {
+            // Apply ID_CATEGORY_MAP to remap categories (same as local data)
+            const remappedWords = supabaseWords.map(word => {
+              const forcedCategory = ID_CATEGORY_MAP[word.id];
+              if (forcedCategory && validateCategory(forcedCategory)) {
+                return { ...word, category: forcedCategory as Word['category'] };
+              }
+              return word;
+            });
+            console.log(`✅ Loaded ${remappedWords.length} words from Supabase`);
+            setAllWords(remappedWords);
+            setDataSource('supabase');
+            setIsLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.warn('⚠️ Supabase fetch failed, falling back to local:', err);
+        }
+      }
+
+      // Fallback to local vocabulary.json
       try {
+        console.log('📁 Loading vocabulary from local JSON...');
         await new Promise(resolve => setTimeout(resolve, 50));
         const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
+        console.log(`✅ Loaded ${words.length} words from local JSON`);
         setAllWords(words);
         setDataSource('local');
       } catch (err) {
-        console.warn('⚠️ Error loading vocabulary:', err);
+        console.error('❌ Error loading vocabulary:', err);
+        setError('Failed to load vocabulary');
+        // Last resort fallback
         const words = (vocabularyData as RawVocabularyItem[]).map(transformToWord);
         setAllWords(words);
         setDataSource('local');
@@ -209,6 +241,6 @@ export function useVocabulary(currentLocationId: string = 'all') {
     allWords, filteredWords, wordsByCategory, coreWords, isLoading,
     error, dataSource, searchWords, addNewWord,
     totalCount: allWords.length, filteredCount: filteredWords.length,
-    reload: () => {} 
+    reload: () => {}
   };
 }

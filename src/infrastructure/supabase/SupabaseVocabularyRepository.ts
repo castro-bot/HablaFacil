@@ -10,22 +10,62 @@ interface WordRow {
   spanish: string;
   english: string;
   category: string;
-  location_id: string | null;
   symbol_url: string | null;
   frequency: number;
 }
 
 /**
- * Supabase implementation of IVocabularyRepository
- * Following Clean Architecture: Infrastructure implements Domain interfaces
+ * Category mapping: Frontend (English) → Database (Spanish)
+ * The database uses Spanish category names, frontend uses English
  */
+const CATEGORY_TO_DB: Record<string, string> = {
+  pronouns: 'pronombres',
+  verbs: 'verbos',
+  social: 'sociales',
+  questions: 'preguntas',
+  nouns: 'sustantivos',
+  emotions: 'emociones',
+  adjectives: 'adjetivos',
+  numbers: 'numeros',
+  colors: 'colores',
+  time: 'tiempo',
+  // Additional frontend categories that map to 'sustantivos'
+  body: 'sustantivos',
+  home: 'sustantivos',
+  school: 'sustantivos',
+  food: 'sustantivos',
+  clothing: 'sustantivos',
+  vehicles: 'sustantivos',
+  nature: 'sustantivos',
+  places: 'sustantivos',
+  animals: 'sustantivos',
+};
+
+/**
+ * Category mapping: Database (Spanish) → Frontend (English)
+ */
+const DB_TO_CATEGORY: Record<string, string> = {
+  pronombres: 'pronouns',
+  verbos: 'verbs',
+  sociales: 'social',
+  preguntas: 'questions',
+  sustantivos: 'nouns',
+  emociones: 'emotions',
+  adjetivos: 'adjectives',
+  numeros: 'numbers',
+  colores: 'colors',
+  tiempo: 'time',
+};
+
+
 export class SupabaseVocabularyRepository implements IVocabularyRepository {
   /**
    * Maps database row (snake_case) to domain entity (camelCase)
    */
   private mapRowToWord(row: WordRow): Word {
-    // Validate category or fallback to 'nouns'
-    const category: WordCategory = validateCategory(row.category) ? row.category as WordCategory : 'nouns';
+    // Map Spanish DB category to English frontend category, fallback to 'nouns'
+    const mappedCategory = DB_TO_CATEGORY[row.category] || row.category;
+    const category: WordCategory = validateCategory(mappedCategory) ? mappedCategory as WordCategory : 'nouns';
 
     // Validate frequency (1, 2, or 3) or fallback to LOW (1)
     const validFrequencies = [WF.LOW, WF.MEDIUM, WF.HIGH];
@@ -38,7 +78,6 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
       spanish: row.spanish,
       english: row.english,
       category,
-      locationId: row.location_id ?? undefined,
       symbolUrl: row.symbol_url ?? undefined,
       frequency,
     };
@@ -143,12 +182,14 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
 
     const id = `${slug}_${Math.random().toString(36).substring(2, 7)}`;
 
+    // Map English frontend category to Spanish DB category
+    const dbCategory = CATEGORY_TO_DB[word.category] || word.category;
+
     const row: WordRow = {
       id,
       spanish: word.spanish,
       english: word.english,
-      category: word.category,
-      location_id: word.locationId ?? null,
+      category: dbCategory,
       symbol_url: word.symbolUrl ?? null,
       frequency: word.frequency,
     };
