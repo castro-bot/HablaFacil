@@ -1,7 +1,7 @@
 // src/domain/entities/index.ts
 
 // 1. Exportamos los TIPOS puros con "export type"
-export type { Word, WordCategory } from './Word'; 
+export type { Word, WordCategory } from './Word';
 
 // 2. Exportamos los VALORES (Constantes y Clases)
 // ¡Fíjate que WordFrequency está AQUÍ abajo, no arriba!
@@ -10,7 +10,6 @@ export {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
   CATEGORY_COLORS,
-  CATEGORY_EMOJIS,
   CATEGORY_IMAGES,
   createWord,
   wordBelongsToLocation,

@@ -92,21 +92,35 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
 
   /**
    * Retrieves all vocabulary words from Supabase
+   * Includes a timeout to prevent hanging when offline
    */
   async getAllWords(): Promise<Word[]> {
     if (!supabase) return [];
 
-    const { data, error } = await supabase
+    // Add timeout to prevent hanging when offline
+    const timeoutMs = 5000;
+    const fetchPromise = supabase
       .from(Tables.WORDS)
       .select('*')
       .order('frequency', { ascending: false });
 
-    if (error) {
-      console.error('Error fetching words:', error);
+    const timeoutPromise = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('Supabase request timed out')), timeoutMs)
+    );
+
+    try {
+      const { data, error } = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (error) {
+        console.error('Error fetching words:', error);
+        return [];
+      }
+
+      return (data as WordRow[]).map(this.mapRowToWord);
+    } catch (err) {
+      console.warn('⚠️ Supabase fetch timed out or failed:', err);
       return [];
     }
-
-    return (data as WordRow[]).map(this.mapRowToWord);
   }
 
   /**

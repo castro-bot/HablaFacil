@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import { Settings, X, Plus, AlertTriangle, Search, Speech } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { useVocabulary, useAISuggestions, useQuickPhrases, useSpeech } from '../hooks';
 import { SymbolGrid } from '../components/SymbolGrid';
@@ -30,6 +31,12 @@ export function HomePage() {
   // Lógica de búsqueda
   const displayWords = searchTerm ? searchWords(searchTerm) : filteredWords;
 
+  // Derive unique categories from the actual vocabulary
+  const availableCategories = useMemo(() => {
+    const cats = new Set(filteredWords.map(w => w.category));
+    return Array.from(cats);
+  }, [filteredWords]);
+
   const handleQuickPhraseClick = useCallback((word: Word) => {
     addWord(word);
     speak(word.spanish);
@@ -48,8 +55,11 @@ export function HomePage() {
     if (words.length > 0) {
       clearSentence();
       addMultipleWords(words);
+      // Speak the full phrase aloud
+      const phrase = words.map(w => w.spanish).join(' ');
+      speak(phrase);
     }
-  }, [filteredWords, clearSentence, addMultipleWords]);
+  }, [filteredWords, clearSentence, addMultipleWords, speak]);
 
   if (isLoading) {
     return (
@@ -73,15 +83,15 @@ export function HomePage() {
             {/* Logo y Configuración */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 select-none">
-                  🗣️ HablaFácil
+                <h1 className="flex items-center gap-2 text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 select-none">
+                  <Speech className="w-6 h-6 shrink-0" style={{ color: '#5e17eb' }} /> HablaFácil
                 </h1>
                 <button
                   onClick={() => setIsSettingsOpen(true)}
                   className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all"
                   title="Configuración"
                 >
-                  ⚙️
+                  <Settings className="w-5 h-5" />
                 </button>
               </div>
 
@@ -98,19 +108,20 @@ export function HomePage() {
             {/* Barra de Búsqueda */}
             <div className="flex items-center gap-3 flex-1 md:justify-end">
               <div className="relative flex-1 max-w-md group">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Buscar palabra..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-4 pr-10 py-2 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all shadow-sm"
+                  className="w-full pl-9 pr-10 py-2 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all shadow-sm"
                 />
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm('')}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 bg-gray-200 hover:bg-gray-300 rounded-full w-5 h-5 flex items-center justify-center text-xs"
                   >
-                    ✕
+                    <X className="w-3 h-3" />
                   </button>
                 )}
               </div>
@@ -120,7 +131,7 @@ export function HomePage() {
                 onClick={() => setIsAddModalOpen(true)}
                 className="hidden sm:flex items-center gap-2 px-4 py-2 bg-white border border-blue-100 text-blue-600 hover:bg-blue-50 hover:border-blue-300 rounded-xl font-medium transition-all shadow-sm"
               >
-                <span>➕</span>
+                <Plus className="w-4 h-4" />
                 <span>Crear</span>
               </button>
             </div>
@@ -131,7 +142,7 @@ export function HomePage() {
       {/* Error Banner */}
       {vocabError && (
         <div className="shrink-0 bg-red-50 border-b border-red-100 px-4 py-2 text-center text-red-600 text-sm">
-          ⚠️ Modo sin conexión: {vocabError}
+          <AlertTriangle className="w-4 h-4 inline mr-1" /> Modo sin conexión: {vocabError}
         </div>
       )}
 
@@ -195,6 +206,7 @@ export function HomePage() {
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
         onAdd={addNewWord}
+        availableCategories={availableCategories}
       />
 
       <SettingsModal

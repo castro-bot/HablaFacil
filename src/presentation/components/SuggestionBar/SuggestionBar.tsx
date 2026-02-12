@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import type { Word } from '../../../domain/entities';
 import type { PhraseTemplate } from '../../../domain/entities';
-import { CATEGORY_EMOJIS } from '../../../domain/entities';
+import { CATEGORY_ICONS, FALLBACK_ICON } from '../../utils/categoryIcons';
 
 interface SuggestionBarProps {
   suggestions: Word[];
@@ -93,7 +93,7 @@ const SuggestionChip = React.memo(function SuggestionChip({
   onClick: (w: Word) => void;
 }) {
   const [imageError, setImageError] = React.useState(false);
-  const emoji = CATEGORY_EMOJIS[word.category] ?? '💬';
+  const IconComponent = CATEGORY_ICONS[word.category] ?? FALLBACK_ICON;
   const showImage = word.symbolUrl && !imageError;
 
   return (
@@ -111,7 +111,7 @@ const SuggestionChip = React.memo(function SuggestionChip({
           onError={() => setImageError(true)}
         />
       ) : (
-        <span className="text-sm">{emoji}</span>
+        <IconComponent className="w-4 h-4 text-green-600" />
       )}
       {word.spanish}
     </button>

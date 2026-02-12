@@ -4,11 +4,11 @@ export const WordFrequency = { HIGH: 3, MEDIUM: 2, LOW: 1 } as const;
 // Definimos el tipo explícitamente para evitar errores de asignación
 export type WordFrequency = typeof WordFrequency[keyof typeof WordFrequency];
 
-export type WordCategory = 
-  | 'pronouns' | 'verbs' | 'social' | 'questions' 
+export type WordCategory =
+  | 'pronouns' | 'verbs' | 'social' | 'questions'
   | 'emotions' | 'adjectives' | 'numbers' | 'colors' | 'time'
-  | 'body' | 'home' | 'school' | 'food' | 'clothing' 
-  | 'vehicles' | 'nature' | 'places' | 'animals' 
+  | 'body' | 'home' | 'school' | 'food' | 'clothing'
+  | 'vehicles' | 'nature' | 'places' | 'animals'
   | 'nouns';
 
 export const CATEGORY_LABELS: Record<WordCategory, string> = {
@@ -42,29 +42,23 @@ export const CATEGORY_IMAGES: Record<WordCategory, string> = {
 };
 
 export const CATEGORY_ORDER: WordCategory[] = [
-  'pronouns', 'verbs', 'social', 'questions', 
-  'emotions', 'adjectives', 'food', 'home', 
-  'school', 'body', 'places', 'clothing', 
-  'vehicles', 'nature', 'time', 'colors', 'numbers', 
+  'pronouns', 'verbs', 'social', 'questions',
+  'emotions', 'adjectives', 'food', 'home',
+  'school', 'body', 'places', 'clothing',
+  'vehicles', 'nature', 'time', 'colors', 'numbers',
   'animals', 'nouns'
 ];
 
 export const CATEGORY_COLORS: Record<WordCategory, string> = {
   pronouns: 'bg-blue-100', verbs: 'bg-green-100', social: 'bg-yellow-100',
   questions: 'bg-purple-100', nouns: 'bg-orange-100', emotions: 'bg-pink-100',
-  adjectives: 'bg-teal-100', numbers: 'bg-indigo-100', animals: 'bg-emerald-100', 
+  adjectives: 'bg-teal-100', numbers: 'bg-indigo-100', animals: 'bg-emerald-100',
   food: 'bg-red-100', clothing: 'bg-cyan-100', time: 'bg-gray-100', colors: 'bg-rose-100',
   body: 'bg-stone-100', home: 'bg-amber-100', vehicles: 'bg-slate-100',
   school: 'bg-violet-100', places: 'bg-sky-100', nature: 'bg-lime-100'
 };
 
-export const CATEGORY_EMOJIS: Record<WordCategory, string> = {
-   pronouns: '👤', verbs: '🏃', social: '👋', questions: '❓',
-   nouns: '📦', emotions: '😊', adjectives: '✨', numbers: '🔢',
-   colors: '🎨', time: '⏰', body: '🦵', home: '🏠', school: '🎒',
-   food: '🍎', clothing: '👕', vehicles: '🚗', nature: '🌳', places: '🏙️',
-   animals: '🐶'
-};
+
 
 export interface Word {
   id: string; spanish: string; english: string; category: WordCategory;

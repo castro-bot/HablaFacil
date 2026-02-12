@@ -54,7 +54,16 @@ export const SUGGESTION_RULES: SuggestionRule[] = [
   // Fallback por categoria
   { trigger: { category: 'verbs' }, suggestedWordIds: ['agua', 'comida', 'bano', 'mama', 'papa', 'amigo'] },
   { trigger: { category: 'emotions' }, suggestedWordIds: ['ayudar', 'mama', 'papa', 'por_favor'] },
+  { trigger: { category: 'food' }, suggestedWordIds: ['comer', 'beber', 'quiero', 'mas', 'por_favor', 'agua'] },
+  { trigger: { category: 'nouns' }, suggestedWordIds: ['quiero', 'necesito', 'ir', 'ver', 'por_favor'] },
+  { trigger: { category: 'social' }, suggestedWordIds: ['mama', 'papa', 'amigo', 'ayudar', 'ir'] },
+  { trigger: { category: 'places' }, suggestedWordIds: ['ir', 'quiero', 'puedo', 'necesito'] },
+  { trigger: { category: 'body' }, suggestedWordIds: ['me_duele', 'ayudar', 'medicina', 'necesito'] },
+  { trigger: { category: 'questions' }, suggestedWordIds: ['mama', 'papa', 'comer', 'jugar', 'ir', 'bano'] },
 ];
+
+// Generic fallback — popular words to show when nothing else matches
+const GENERIC_FALLBACK_IDS = ['yo', 'quiero', 'comer', 'ir', 'agua', 'si', 'no', 'por_favor'];
 
 export interface PhraseTemplate {
   id: string;
@@ -115,22 +124,36 @@ export function getSuggestionsForSentence(
 ): Word[] {
   if (sentenceWords.length === 0) return [];
 
-  const lastWord = sentenceWords[sentenceWords.length - 1];
   const wordMap = new Map(allWords.map(w => [w.id, w]));
+  const sentenceWordIds = new Set(sentenceWords.map(w => w.id));
 
-  const specificRule = SUGGESTION_RULES.find(r => r.trigger.wordId === lastWord.id);
-  if (specificRule) {
-    return specificRule.suggestedWordIds
+  // Helper to resolve IDs → Word[], excluding words already in the sentence
+  const resolveIds = (ids: string[]): Word[] =>
+    ids
+      .filter(id => !sentenceWordIds.has(id))
       .map(id => wordMap.get(id))
       .filter((w): w is Word => w !== undefined);
+
+  // Walk backwards through the sentence to find the first matching rule
+  for (let i = sentenceWords.length - 1; i >= 0; i--) {
+    const word = sentenceWords[i];
+
+    // Try specific word rule
+    const specificRule = SUGGESTION_RULES.find(r => r.trigger.wordId === word.id);
+    if (specificRule) {
+      const results = resolveIds(specificRule.suggestedWordIds);
+      if (results.length > 0) return results;
+    }
+
+    // Try category rule
+    const categoryRule = SUGGESTION_RULES.find(r => r.trigger.category === word.category);
+    if (categoryRule) {
+      const results = resolveIds(categoryRule.suggestedWordIds);
+      if (results.length > 0) return results;
+    }
   }
 
-  const categoryRule = SUGGESTION_RULES.find(r => r.trigger.category === lastWord.category);
-  if (categoryRule) {
-    return categoryRule.suggestedWordIds
-      .map(id => wordMap.get(id))
-      .filter((w): w is Word => w !== undefined);
-  }
-
-  return [];
+  // Final fallback — always return common words so the bar is never empty
+  const fallback = resolveIds(GENERIC_FALLBACK_IDS);
+  return fallback;
 }

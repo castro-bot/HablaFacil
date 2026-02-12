@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { type Word, CATEGORY_COLORS, CATEGORY_EMOJIS } from '../../../domain/entities';
+import { type Word, CATEGORY_COLORS } from '../../../domain/entities';
+import { CATEGORY_ICONS, FALLBACK_ICON } from '../../utils/categoryIcons';
 import { useSpeech } from '../../hooks';
 
 interface SymbolCardProps {
@@ -28,9 +29,9 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
   };
 
   const colorClass = CATEGORY_COLORS[word.category] ?? 'bg-gray-100 border-gray-400 hover:bg-gray-200';
-  const emoji = CATEGORY_EMOJIS[word.category] ?? '💬';
+  const IconComponent = CATEGORY_ICONS[word.category] ?? FALLBACK_ICON;
 
-  // Mostrar imagen si existe URL y no ha dado error
+  // Show image if URL exists and hasn't errored
   const showImage = word.symbolUrl && !imageError;
 
   return (
@@ -56,7 +57,7 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
     >
       <span className="absolute top-1 left-1 text-xs text-gray-500 opacity-60">⋮⋮</span>
 
-      {/* Symbol Image with Fallback */}
+      {/* Symbol Image with Lucide icon fallback */}
       {showImage ? (
         <img
           src={word.symbolUrl}
@@ -67,13 +68,10 @@ export function SymbolCard({ word, onWordClick, showTranslation = true }: Symbol
           className="w-16 h-16 md:w-20 md:h-20 object-contain mb-1 drop-shadow-sm pointer-events-none select-none transition-transform group-hover:scale-110"
         />
       ) : (
-        <span
-          className="text-3xl md:text-4xl mb-1 select-none"
-          role="img"
+        <IconComponent
+          className="w-10 h-10 md:w-12 md:h-12 mb-1 text-gray-500"
           aria-hidden="true"
-        >
-          {emoji}
-        </span>
+        />
       )}
 
       {/* Spanish word */}

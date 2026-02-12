@@ -13,6 +13,36 @@ interface UseAISuggestionsResult {
 const suggestionCache = new Map<string, Word[]>();
 const MAX_CACHE_SIZE = 20;
 
+// Circuit breaker: stop calling the API after consecutive failures
+const MAX_CONSECUTIVE_FAILURES = 3;
+const CIRCUIT_BREAKER_COOLDOWN_MS = 60_000; // 1 minute cooldown
+let consecutiveFailures = 0;
+let circuitBreakerUntil = 0;
+
+function isCircuitOpen(): boolean {
+  if (consecutiveFailures < MAX_CONSECUTIVE_FAILURES) return false;
+  if (Date.now() > circuitBreakerUntil) {
+    // Cooldown expired, attempt again
+    consecutiveFailures = 0;
+    return false;
+  }
+  return true;
+}
+
+function recordSuccess(): void {
+  consecutiveFailures = 0;
+}
+
+function recordFailure(): void {
+  consecutiveFailures++;
+  if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+    circuitBreakerUntil = Date.now() + CIRCUIT_BREAKER_COOLDOWN_MS;
+    console.warn(
+      `⚡ AI suggestions circuit breaker open — falling back to static suggestions for ${CIRCUIT_BREAKER_COOLDOWN_MS / 1000}s`
+    );
+  }
+}
+
 function getCacheKey(words: ReadonlyArray<Word>): string {
   return words.map(w => w.id).join('_');
 }
@@ -36,7 +66,8 @@ function setCachedSuggestions(words: ReadonlyArray<Word>, suggestions: Word[]): 
 }
 
 /**
- * Hook for AI-powered word suggestions with debouncing, caching, and fallback to static suggestions
+ * Hook for AI-powered word suggestions with debouncing, caching,
+ * circuit breaker, and fallback to static suggestions
  */
 export function useAISuggestions(
   sentence: Sentence,
@@ -75,6 +106,13 @@ export function useAISuggestions(
       return;
     }
 
+    // If circuit breaker is open, skip AI and use static immediately
+    if (isCircuitOpen()) {
+      setAiSuggestions([]);
+      setIsLoading(false);
+      return;
+    }
+
     // Check cache first
     const cached = getCachedSuggestions(sentence.words);
     if (cached) {
@@ -103,6 +141,7 @@ export function useAISuggestions(
 
         // Only update if not aborted
         if (!controller.signal.aborted) {
+          recordSuccess();
           // Cache the result
           if (suggestions.length > 0) {
             setCachedSuggestions(sentence.words, suggestions);
@@ -112,7 +151,9 @@ export function useAISuggestions(
         }
       } catch (error) {
         if (!controller.signal.aborted) {
-          console.warn('AI suggestions failed, using static fallback');
+          recordFailure();
+          console.warn('AI suggestions failed, using static fallback:', error);
+          // Clear AI suggestions so static fallback activates immediately
           setAiSuggestions([]);
           setIsLoading(false);
         }

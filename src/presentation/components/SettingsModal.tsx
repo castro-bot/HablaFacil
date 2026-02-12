@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
 import { useSpeech } from '../hooks/useSpeech';
+import { Settings, X } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -27,12 +28,15 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
         <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-          <h2 className="text-xl font-bold text-gray-800">⚙️ Configuración</h2>
+          <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+            <Settings className="w-5 h-5 text-gray-500" />
+            Configuración
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors rounded-full p-1 hover:bg-gray-100"
           >
-            ✕
+            <X className="w-5 h-5" />
           </button>
         </div>
 
