@@ -78,7 +78,11 @@ export class SupabaseVocabularyRepository implements IVocabularyRepository {
       spanish: row.spanish,
       english: row.english,
       category,
-      symbolUrl: row.symbol_url ?? undefined,
+      symbolUrl: row.symbol_url
+        ? (row.symbol_url.startsWith('/')
+            ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${row.symbol_url}`
+            : row.symbol_url)
+        : undefined,
       frequency,
     };
   }

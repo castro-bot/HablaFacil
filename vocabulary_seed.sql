@@ -84,7 +84,7 @@ INSERT INTO words (id, spanish, english, category, frequency, symbol_url) VALUES
   ('buenas_noches', 'Buenas noches', 'Good night', 'sociales', 2, 'https://api.arasaac.org/api/pictograms/6942?download=false'),
   ('que_pregunta', '¿Qué?', 'What question', 'preguntas', 3, 'https://api.arasaac.org/api/pictograms/9853?download=false'),
   ('donde_pregunta', '¿Dónde?', 'Where question', 'preguntas', 3, 'https://api.arasaac.org/api/pictograms/7764?download=false'),
-  ('cuando_pregunta', '¿Cuándo?', 'When question', 'preguntas', 3, 'https://api.arasaac.org/api/pictograms/32874?download=false'),
+  ('cuando_pregunta', '¿Cuándo?', 'When question', 'preguntas', 3, '/symbols/cuando.svg'),
   ('quien_pregunta', '¿Quién?', 'Who question', 'preguntas', 3, 'https://api.arasaac.org/api/pictograms/6438?download=false'),
   ('por_que', '¿Por qué?', 'Why question', 'preguntas', 3, '/symbols/por_que.svg'),
   ('como', '¿Cómo?', 'How question', 'preguntas', 3, '/symbols/como.svg'),
